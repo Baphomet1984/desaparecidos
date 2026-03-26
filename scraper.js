@@ -1,4 +1,4 @@
-const obtenerAlertasAmber = require("./fuentes/amber")
+const obtenerAlertasAmber = require("./fuentes/amber.js")
 const {
   cargarDB,
   guardarDB,
