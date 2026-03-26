@@ -8,8 +8,8 @@
     "fechaDesaparicion": "2025-03-10",
     "descripcion": "Cabello largo negro, complexión delgada, última vez vista con uniforme escolar azul. Señas particulares: lunar en mejilla derecha.",
     "ubicacion": "Col. Las Flores, Xonacatepec, Puebla",
-    "lat": 19.0910,
-    "lon": -98.1080,
+    "lat": 19.091,
+    "lon": -98.108,
     "contacto": "2221234567",
     "foto": "",
     "url": ""
@@ -23,8 +23,8 @@
     "fechaDesaparicion": "2025-03-12",
     "descripcion": "Alerta Ámbar activada. Cabello corto castaño, ojos café, última vez vestía playera roja y pants azul. Posiblemente acompañado de adulto desconocido.",
     "ubicacion": "Barrio de San Miguel, Puebla",
-    "lat": 19.0840,
-    "lon": -98.0970,
+    "lat": 19.084,
+    "lon": -98.097,
     "contacto": "2229876543",
     "foto": "",
     "url": ""
@@ -38,8 +38,8 @@
     "fechaDesaparicion": "2025-02-28",
     "descripcion": "Localizada con vida el 15 de marzo de 2025 en zona norte de Puebla. Se encontraba en buen estado de salud. Caso cerrado.",
     "ubicacion": "Localizada: Hospital General Norte, Puebla",
-    "lat": 19.0960,
-    "lon": -98.1020,
+    "lat": 19.096,
+    "lon": -98.102,
     "contacto": "",
     "foto": "",
     "url": ""
@@ -53,8 +53,8 @@
     "fechaDesaparicion": "2025-01-15",
     "descripcion": "Identificado el 20 de febrero de 2025. En paz descanse.",
     "ubicacion": "Encontrado: Periférico Ecológico, Puebla",
-    "lat": 19.0790,
-    "lon": -98.1110,
+    "lat": 19.079,
+    "lon": -98.111,
     "contacto": "",
     "foto": "",
     "url": ""
@@ -73,5 +73,23 @@
     "contacto": "2224445566",
     "foto": "",
     "url": ""
+  },
+  {
+    "id": "CASO_0006",
+    "nombre": "sebastian david ledezma hernandez",
+    "edad": 41,
+    "sexo": "m",
+    "status": "encontrado",
+    "fechaDesaparicion": "2026-01-22",
+    "descripcion": "moreno 1.74 m.",
+    "ubicacion": "xonacatepec",
+    "lat": null,
+    "lon": null,
+    "contacto": "5638451580",
+    "foto": null,
+    "url": "1",
+    "creadoEn": "2026-03-26T06:57:16.593Z",
+    "actualizadoEn": "2026-03-26T07:04:04.110Z",
+    "notasActualizacion": "murio por heridas"
   }
 ]
