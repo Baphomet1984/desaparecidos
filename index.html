@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NODOS DEL SISTEMA // RED_ALIADOS</title>
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
+
+  :root {
+    --bg:      #03080d;
+    --teal:    #00e5cc;
+    --green:   #00ff88;
+    --amber:   #ffb300;
+    --red:     #ff3366;
+    --purple:  #cc44ff;
+    --magenta: #ff44cc;
+    --white:   #e8f4f0;
+    --dim:     rgba(232,244,240,0.45);
+    --panel:   rgba(3,8,13,0.82);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* scanlines */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 3px,
+      rgba(0,229,204,0.006) 3px, rgba(0,229,204,0.006) 4px
+    );
+    pointer-events: none; z-index: 100;
+  }
+
+  /* ── MAP SECTION ── */
+  .map-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    min-height: 500px;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    display: block;
+    overflow: hidden;
+  }
+
+  #map {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    background: var(--bg);
+  }
+
+  .leaflet-container {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* darken leaflet tiles */
+  .leaflet-tile { filter: brightness(0.80) saturate(0.85) hue-rotate(160deg); }
+
+  /* remove leaflet branding */
+  .leaflet-control-attribution { display: none !important; }
+  .leaflet-control-zoom { display: none !important; }
+
+  /* map overlay: vignette + scanlines */
+  .map-overlay {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 30%, rgba(3,8,13,0.65) 100%);
+    pointer-events: none; z-index: 10;
+  }
+
+  /* map overlay: corner brackets */
+  .map-corner { position: absolute; width: 28px; height: 28px; z-index: 11; }
+  .map-corner.tl { top: 12px; left: 12px; border-top: 1px solid var(--teal); border-left: 1px solid var(--teal); }
+  .map-corner.tr { top: 12px; right: 12px; border-top: 1px solid var(--teal); border-right: 1px solid var(--teal); }
+  .map-corner.bl { bottom: 12px; left: 12px; border-bottom: 1px solid var(--teal); border-left: 1px solid var(--teal); }
+  .map-corner.br { bottom: 12px; right: 12px; border-bottom: 1px solid var(--teal); border-right: 1px solid var(--teal); }
+
+  /* status pill on map */
+  .map-status {
+    position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+    z-index: 12;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.5rem; letter-spacing: 0.28em;
+    color: var(--teal);
+    background: rgba(3,8,13,0.8);
+    border: 1px solid rgba(0,229,204,0.2);
+    padding: 4px 16px;
+    white-space: nowrap;
+  }
+
+  /* scan coords ticker */
+  .map-coords {
+    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+    z-index: 12;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.48rem; letter-spacing: 0.18em;
+    color: rgba(0,229,204,0.5);
+    background: rgba(3,8,13,0.7);
+    border: 1px solid rgba(0,229,204,0.1);
+    padding: 3px 12px;
+    white-space: nowrap;
+  }
+
+  /* signal count bottom-right */
+  .map-signal-count {
+    position: absolute; bottom: 16px; right: 16px; z-index: 12;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.48rem; letter-spacing: 0.15em;
+    color: var(--green); opacity: 0.7;
+  }
+
+  /* ── CUSTOM LEAFLET MARKERS ── */
+
+  /* HUB marker */
+  .hub-marker-wrap {
+    position: relative;
+    width: 20px; height: 20px;
+  }
+  .hub-core {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 10px var(--teal), 0 0 20px rgba(0,229,204,0.4);
+    z-index: 2;
+  }
+  .hub-pulse {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 10px; height: 10px; border-radius: 50%;
+    border: 1px solid var(--teal);
+    animation: hubPulse 2s ease-out infinite;
+  }
+  .hub-pulse:nth-child(2) { animation-delay: 0.66s; }
+  .hub-pulse:nth-child(3) { animation-delay: 1.33s; }
+
+  @keyframes hubPulse {
+    0%   { transform: translate(-50%,-50%) scale(1);   opacity: 0.8; }
+    100% { transform: translate(-50%,-50%) scale(6);   opacity: 0; }
+  }
+
+  /* Ally / signal marker */
+  .signal-marker-wrap {
+    position: relative;
+    width: 14px; height: 14px;
+  }
+  .signal-core {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    z-index: 2;
+  }
+  .signal-pulse {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 6px; height: 6px; border-radius: 50%;
+    border: 1px solid var(--green);
+    animation: signalPulse 2.5s ease-out infinite;
+  }
+  .signal-pulse:nth-child(2) { animation-delay: 0.8s; }
+
+  @keyframes signalPulse {
+    0%   { transform: translate(-50%,-50%) scale(1);   opacity: 0.7; }
+    100% { transform: translate(-50%,-50%) scale(5.5); opacity: 0; }
+  }
+
+  /* Leaflet popup override */
+  .leaflet-popup-content-wrapper {
+    background: rgba(3,8,13,0.95) !important;
+    border: 1px solid rgba(0,229,204,0.3) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 0 20px rgba(0,229,204,0.15) !important;
+    color: var(--white) !important;
+  }
+  .leaflet-popup-tip { background: rgba(3,8,13,0.95) !important; }
+  .leaflet-popup-content {
+    font-family: 'Share Tech Mono', monospace !important;
+    font-size: 0.6rem !important;
+    line-height: 1.8 !important;
+    margin: 10px 14px !important;
+    color: var(--white) !important;
+  }
+  .leaflet-popup-content .pop-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.72rem;
+    color: var(--green);
+    margin-bottom: 4px;
+    display: block;
+  }
+  .leaflet-popup-content .pop-status {
+    color: var(--teal); opacity: 0.6;
+  }
+  .leaflet-popup-content .pop-link {
+    display: inline-block; margin-top: 6px;
+    color: var(--teal); text-decoration: none;
+    border: 1px solid rgba(0,229,204,0.3);
+    padding: 2px 8px; font-size: 0.55rem;
+    transition: background 0.2s;
+  }
+  .leaflet-popup-content .pop-link:hover {
+    background: rgba(0,229,204,0.1);
+  }
+  .leaflet-popup-close-button {
+    color: rgba(0,229,204,0.4) !important;
+    font-size: 16px !important;
+    top: 4px !important; right: 6px !important;
+  }
+
+  /* connection lines — drawn via SVG overlay in Leaflet */
+
+  /* ── STAGE (cards section) ── */
+  .stage {
+    position: relative; z-index: 10;
+    display: flex; flex-direction: column;
+    align-items: center;
+    padding: 0 1.5rem 5rem;
+  }
+
+  /* ── STATUS BAR ── */
+  .status-bar {
+    width: 100%; max-width: 960px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.35rem 0.75rem;
+    border-bottom: 1px solid rgba(0,229,204,0.08);
+    background: rgba(0,229,204,0.015);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.5rem; letter-spacing: 0.15em;
+    color: var(--teal); opacity: 0.6;
+  }
+  .dot-live {
+    display: inline-block; width: 5px; height: 5px;
+    border-radius: 50%; background: var(--teal);
+    animation: blink 1.5s infinite; margin-right: 0.4rem; vertical-align: middle;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding: 3.5rem 1rem 2rem;
+    width: 100%; max-width: 960px;
+  }
+  .header::after {
+    content: '── ◈ ──'; display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem; color: rgba(0,229,204,0.3);
+    letter-spacing: 0.5em; margin-top: 1.5rem;
+  }
+
+  .glitch-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.8rem, 6vw, 4rem); font-weight: 900;
+    color: var(--white); position: relative;
+    display: inline-block; line-height: 1;
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 40px rgba(0,229,204,0.25);
+  }
+  .glitch-title::before {
+    content: attr(data-text); position: absolute; inset: 0;
+    color: var(--red); animation: glitch1 4s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  }
+  .glitch-title::after {
+    content: attr(data-text); position: absolute; inset: 0;
+    color: var(--teal); animation: glitch2 4s infinite;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  }
+  @keyframes glitch1 {
+    0%,90%,100%{transform:translate(0);opacity:0;}
+    92%{transform:translate(-4px,2px);opacity:1;}
+    94%{transform:translate(4px,-2px);opacity:1;}
+    96%{transform:translate(0);opacity:0;}
+  }
+  @keyframes glitch2 {
+    0%,90%,100%{transform:translate(0);opacity:0;}
+    93%{transform:translate(4px,-1px);opacity:1;}
+    95%{transform:translate(-3px,2px);opacity:1;}
+    97%{transform:translate(0);opacity:0;}
+  }
+
+  .subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem; color: var(--teal);
+    letter-spacing: 0.3em; text-transform: uppercase;
+    margin-top: 0.65rem; opacity: 0.6;
+  }
+  .header-desc {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.92rem; color: var(--dim);
+    max-width: 520px; margin: 1rem auto 0;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  .nav-buttons {
+    display: flex; gap: 0.7rem;
+    margin: 1.5rem 0 2.5rem;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .nav-btn {
+    position: relative; background: transparent;
+    border: 1px solid var(--purple); color: var(--purple);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 0.5rem 1.3rem; cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    overflow: hidden; transition: color 0.25s;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  }
+  .nav-btn::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, var(--purple), var(--magenta));
+    opacity: 0; transition: opacity 0.25s; z-index: 0;
+  }
+  .nav-btn::after {
+    content: ''; position: absolute; left: 0; top: 0;
+    width: 2px; height: 100%;
+    background: linear-gradient(180deg, transparent, var(--magenta), transparent);
+    transform: translateY(-100%);
+  }
+  .nav-btn:hover::after { transform: translateY(100%); transition: transform 0.4s ease; }
+  .nav-btn:hover::before { opacity: 1; }
+  .nav-btn:hover { color: var(--bg); box-shadow: 0 0 20px rgba(204,68,255,0.5); }
+  .nav-btn span { position: relative; z-index: 1; }
+  .nav-btn .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--magenta); animation: blink 1.8s infinite;
+    position: relative; z-index: 1; flex-shrink: 0;
+  }
+
+  /* ── NETWORK META ── */
+  .network-meta {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.55rem; color: rgba(0,229,204,0.4);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .network-meta span { display: flex; align-items: center; gap: 0.4rem; }
+  .network-meta .pulse {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--green); animation: blink 1.2s infinite;
+  }
+
+  /* ── NODES GRID ── */
+  .nodes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1.25rem; max-width: 960px; width: 100%;
+  }
+
+  /* ── NODE CARD ── */
+  .node-card {
+    background: var(--panel);
+    border: 1px solid rgba(0,229,204,0.12);
+    border-radius: 3px; position: relative; overflow: hidden;
+    transition: transform 0.25s, border-color 0.3s, box-shadow 0.3s;
+    display: flex; flex-direction: column;
+    backdrop-filter: blur(4px);
+    animation: fadeUp 0.4s ease both;
+  }
+  .node-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--teal) 0%, transparent 55%);
+    opacity: 0; transition: opacity 0.3s; pointer-events: none;
+  }
+  .node-card:hover::before { opacity: 0.05; }
+  .node-card:hover {
+    border-color: rgba(0,229,204,0.45);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0,229,204,0.1);
+  }
+
+  .node-img-wrap {
+    position: relative; width: 100%; height: 150px;
+    overflow: hidden; border-bottom: 1px solid rgba(0,229,204,0.08);
+  }
+  .node-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(0.65) brightness(0.7); transition: filter 0.3s;
+  }
+  .node-card:hover .node-img-wrap img { filter: saturate(0.9) brightness(0.85); }
+  .node-img-wrap::after {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 3px,
+      rgba(0,229,204,0.04) 3px, rgba(0,229,204,0.04) 4px
+    );
+    pointer-events: none;
+  }
+
+  .node-tag {
+    position: absolute; top: 8px; left: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.48rem; letter-spacing: 0.18em; color: var(--teal);
+    background: rgba(3,8,13,0.82); border: 1px solid rgba(0,229,204,0.25);
+    padding: 2px 7px; text-transform: uppercase;
+  }
+  .node-status {
+    position: absolute; top: 8px; right: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.45rem; letter-spacing: 0.15em;
+    padding: 2px 6px; border: 1px solid rgba(0,255,136,0.3);
+    color: var(--green); background: rgba(0,255,136,0.06);
+    text-transform: uppercase; display: flex; align-items: center; gap: 4px;
+  }
+  .node-status::before {
+    content: ''; display: inline-block; width: 4px; height: 4px;
+    border-radius: 50%; background: var(--green); animation: blink 1.4s infinite;
+  }
+
+  .node-body {
+    padding: 1.1rem 1.2rem 0.9rem; flex: 1; display: flex; flex-direction: column;
+  }
+  .node-id {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--amber); opacity: 0.5; margin-bottom: 0.5rem;
+  }
+  .node-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.88rem; font-weight: 700; color: var(--white);
+    margin-bottom: 0.5rem; line-height: 1.3; letter-spacing: 0.02em;
+  }
+  .node-desc {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.82rem; line-height: 1.6; color: var(--dim); flex: 1;
+  }
+
+  .node-btn {
+    width: 100%; background: transparent; border: none;
+    border-top: 1px solid rgba(0,229,204,0.1); color: var(--teal);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.75rem 1.2rem; text-decoration: none; text-align: left;
+    cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .node-btn::after { content: '→'; opacity: 0.5; transition: opacity 0.2s, transform 0.2s; }
+  .node-btn:hover { background: rgba(0,229,204,0.07); border-top-color: rgba(0,229,204,0.3); }
+  .node-btn:hover::after { opacity: 1; transform: translateX(4px); }
+
+  /* ── CTA ── */
+  .cta-section {
+    max-width: 960px; width: 100%; margin-top: 4rem;
+    border: 1px solid rgba(0,229,204,0.1);
+    background: var(--panel); backdrop-filter: blur(6px);
+    padding: 2.5rem 2rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; top: 0; left: -100%;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+    animation: scanH 3s ease-in-out infinite;
+  }
+  @keyframes scanH { 0%{left:-100%;} 100%{left:100%;} }
+
+  .cta-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.52rem; letter-spacing: 0.3em;
+    color: var(--teal); opacity: 0.6; text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+  .cta-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.1rem,3vw,1.6rem); font-weight: 700;
+    color: var(--white); margin-bottom: 0.75rem; letter-spacing: 0.04em;
+    text-shadow: 0 0 20px rgba(0,229,204,0.15);
+  }
+  .cta-desc {
+    font-family: 'Rajdhani', sans-serif; font-size: 0.9rem;
+    color: var(--dim); max-width: 480px; margin: 0 auto 1.5rem; line-height: 1.7;
+  }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: transparent; border: 1px solid var(--teal); color: var(--teal);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 0.75rem 2rem; text-decoration: none;
+    position: relative; overflow: hidden; transition: color 0.3s;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+  .cta-btn::before {
+    content: ''; position: absolute; inset: 0; background: var(--teal);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s; z-index: -1;
+  }
+  .cta-btn:hover { color: var(--bg); box-shadow: 0 0 24px rgba(0,229,204,0.4); }
+  .cta-btn:hover::before { transform: scaleX(1); }
+
+  .sys-footer {
+    margin-top: 3rem; font-family: 'Share Tech Mono', monospace;
+    font-size: 0.5rem; letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.12); text-align: center; line-height: 2;
+  }
+
+  .empty-state {
+    grid-column: 1/-1; text-align: center; padding: 3rem;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+    color: rgba(0,229,204,0.3); letter-spacing: 0.2em;
+    border: 1px dashed rgba(0,229,204,0.1);
+  }
+
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+  @keyframes fadeUp {
+    from{opacity:0;transform:translateY(12px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  /* ── PHONE ROW ── */
+  .node-phone {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.12em;
+    color: var(--green);
+    padding: 0.55rem 1.2rem;
+    border-top: 1px solid rgba(0,229,204,0.08);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .node-phone::before { content: '◉'; opacity: 0.5; font-size: 0.5rem; }
+  .node-phone a {
+    color: var(--green); text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .node-phone a:hover { opacity: 0.7; }
+  .node-phone.no-phone { display: none; }
+
+  /* ── SEARCH BAR ── */
+  .search-wrap {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(3,8,13,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,229,204,0.12);
+    padding: 0.6rem 1.5rem 0.4rem;
+  }
+  .search-wrap::before {
+    content: '⌕';
+    position: absolute; left: 14px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem; color: rgba(0,229,204,0.4);
+    pointer-events: none; z-index: 1;
+  }
+  #searchInput {
+    width: 100%;
+    max-width: 960px;
+    display: block;
+    margin: 0 auto;
+    background: rgba(0,229,204,0.03);
+    border: 1px solid rgba(0,229,204,0.15);
+    border-radius: 2px;
+    color: var(--white);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.12em;
+    padding: 0.7rem 1rem 0.7rem 2.4rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  #searchInput::placeholder {
+    color: rgba(0,229,204,0.25);
+    letter-spacing: 0.15em;
+  }
+  #searchInput:focus {
+    border-color: rgba(0,229,204,0.4);
+    box-shadow: 0 0 16px rgba(0,229,204,0.08);
+  }
+  .search-count {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.5rem; letter-spacing: 0.18em;
+    color: rgba(0,229,204,0.35);
+    text-align: right;
+    margin-top: 0.4rem;
+    text-transform: uppercase;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .node-card.hidden-card {
+    display: none;
+  }
+
+        /* ══════════════════════════════════════════════
+           PODCAST PANEL DESLIZANTE — LATERAL DERECHO
+        ══════════════════════════════════════════════ */
+        #podcast-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+        }
+        #podcast-overlay.active { display: block; }
+
+        #podcast-panel {
+
+    position: fixed;
+    top: 120px;   /* BAJA el panel debajo del avatar */
+    right: 0;
+
+    transform: translateX(calc(100% - 42px));
+
+    width: 430px;
+    max-width: 94vw;
+
+    z-index: 1000;
+
+    display: flex;
+    align-items: flex-start;
+
+    transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+      
+       #podcast-panel.open {
+    transform: translateX(0);
+}
+
+        #podcast-tab {
+            width: 42px;
+            height: clamp(80px, 28vh, 160px);
+            flex-shrink: 0;
+            align-self: flex-start;
+            position: sticky;
+            top: calc(50vh - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: 0;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 8px 0 0 8px;
+            background: rgba(0, 0, 0, 0.18);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 215, 0, 0.55);
+            border-right: none;
+            box-shadow: -2px 0 16px rgba(255,215,0,0.18), inset 0 0 12px rgba(255,215,0,0.04);
+            overflow: hidden;
+        }
+
+        #podcast-tab .tab-text { display: none; }
+
+        #podcast-tab .tab-icon {
+            display: block;
+            font-size: 1.3rem;
+            color: rgba(255, 215, 0, 1);
+            text-shadow:
+                0 0 8px  rgba(255,215,0,1),
+                0 0 18px rgba(255,200,0,0.8),
+                0 0 32px rgba(255,180,0,0.4);
+            animation: pcTabPulse 2.5s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes pcTabPulse {
+            0%,100% { transform: scale(1);   text-shadow: 0 0 8px rgba(255,215,0,1), 0 0 18px rgba(255,200,0,0.8), 0 0 32px rgba(255,180,0,0.4); }
+            50%      { transform: scale(0.9); text-shadow: 0 0 4px rgba(255,215,0,0.7), 0 0 10px rgba(255,200,0,0.5); }
+        }
+
+        #podcast-content {
+            flex: 1;
+            background: rgba(5,5,8,0.97);
+            border: 1px solid rgba(255,215,0,0.22);
+            border-right: none;
+            padding: 1.3rem 1.1rem 1.3rem 1rem;
+            overflow-y: auto;
+            max-height: 96vh;
+            height: 96vh;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+            position: relative;
+        }
+
+        #podcast-content::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #FFD700 40%, transparent);
+        }
+
+        #podcast-content::before {
+            content: 'PODCAST_STREAM';
+            position: absolute; top: -0.52rem; left: 0.9rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.46rem; letter-spacing: 0.22em;
+            color: #FFD700; background: #050508;
+            padding: 0 0.5rem;
+            opacity: 0.85;
+        }
+
+        .podcast-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.7rem;
+            border-bottom: 1px solid rgba(255,215,0,0.12);
+            flex-shrink: 0;
+        }
+
+        .podcast-panel-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            color: #FFD700;
+            letter-spacing: 0.22em;
+            text-shadow: 0 0 10px rgba(255,215,0,0.45);
+        }
+
+        .podcast-close-btn {
+            background: none;
+            border: 1px solid rgba(255,215,0,0.28);
+            color: #FFD700;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.58rem;
+            cursor: pointer;
+            padding: 3px 8px;
+            letter-spacing: 0.12em;
+            transition: all 0.2s;
+        }
+        .podcast-close-btn:hover {
+            background: rgba(255,215,0,0.1);
+            box-shadow: 0 0 8px rgba(255,215,0,0.3);
+        }
+
+        .podcast-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.2em;
+            color: #FFD700;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 0.35rem;
+            display: block;
+        }
+
+        .podcast-item {
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateX(18px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        #podcast-panel.open .podcast-item:nth-child(2) { opacity:1; transform:none; transition-delay:0.12s; }
+        #podcast-panel.open .podcast-item:nth-child(3) { opacity:1; transform:none; transition-delay:0.22s; }
+        #podcast-panel.open .podcast-item:nth-child(4) { opacity:1; transform:none; transition-delay:0.32s; }
+
+        .podcast-item iframe {
+            width: 100%;
+            border-radius: 3px;
+            border: 1px solid rgba(255,215,0,0.1);
+            box-shadow: 0 0 10px rgba(255,215,0,0.04);
+            transition: box-shadow 0.3s;
+            display: block;
+        }
+        .podcast-item iframe:hover { box-shadow: 0 0 20px rgba(255,215,0,0.14); }
+
+        #podcast-content::-webkit-scrollbar { width: 3px; }
+        #podcast-content::-webkit-scrollbar-track { background: rgba(255,215,0,0.04); }
+        #podcast-content::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.28); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ══ CARDS SECTION ══ -->
+<div class="stage">
+
+  <!-- ══ SEARCH BAR ══ -->
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="// BUSCAR NODO... escribe un nombre" autocomplete="off" spellcheck="false">
+    <div class="search-count" id="searchCount"></div>
+  </div>
+
+  <!-- ══ PODCAST PANEL LATERAL DERECHO ══ -->
+<div id="podcast-overlay"></div>
+<div id="podcast-panel">
+    <div id="podcast-tab" title="Ver / cerrar Podcasts">
+        <span class="tab-icon">🎙</span>
+        <span class="tab-text">Podcasts</span>
+        <canvas id="tab-glow-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border-radius:8px 0 0 8px;"></canvas>
+    </div>
+    <div id="podcast-content">
+        <div class="podcast-panel-header">
+            <span class="podcast-panel-title">// Podcast Feed</span>
+            <button class="podcast-close-btn" id="podcast-close">[ X ]</button>
+        </div>
+        <div class="podcast-item">
+            <span class="podcast-label">// Las Bromas del Panda Show</span>
+            <iframe src="https://widget.spreaker.com/player?show_id=6247023&theme=dark&playlist=show&playlist-continuous=true&chapters-image=true"
+                width="100%" height="400px" title="el panda show" frameborder="0"></iframe>
+        </div>
+        <div class="podcast-item">
+            <span class="podcast-label">// Podcast: Crimen y Castigo</span>
+            <iframe src="https://widget.spreaker.com/player?show_id=6671022&theme=light&playlist=show&playlist-continuous=false&chapters-image=true&episode_image_position=right&hide-logo=false&hide-likes=false&hide-comments=false&hide-sharing=false&hide-download=true"
+                width="100%" height="400px" title="CRIME AND PUNISHMENT" frameborder="0"></iframe>
+        </div>
+        <div class="podcast-item">
+            <span class="podcast-label">// Podcast Psicocatarsis</span>
+            <iframe src="https://widget.spreaker.com/player?show_id=6719012&theme=dark&playlist=show&playlist-continuous=true&chapters-image=true&episode_image_position=right&hide-logo=false&hide-likes=false&hide-comments=false&hide-sharing=false&hide-download=true"
+                width="100%" height="400px" title="PSICOCATARSIS." frameborder="0"></iframe>
+        </div>
+    </div>
+</div>
+<!-- ══ FIN PODCAST PANEL ══ -->
+
+  <div class="status-bar">
+    <span><span class="dot-live"></span>RED_ALIADOS · ONLINE</span>
+    <span id="clock">--:--:--</span>
+    <span>NODOS ACTIVOS · v3.0</span>
+  </div>
+
+  <div class="header">
+    <div class="glitch-title" data-text="Nodos del Sistema">Nodos del Sistema</div>
+    <div class="subtitle">// red de proyectos integrados · cada nodo aporta señal</div>
+    <p class="header-desc">
+      Proyectos independientes integrados a la red.<br>
+      Cada nodo aporta contenido, cultura o caos al flujo digital.
+    </p>
+  </div>
+
+  <div class="nav-buttons">
+    <a class="nav-btn" href="https://baphomet1984.github.io/fail-news/">
+      <span class="dot"></span><span>Bitácora</span>
+    </a>
+    <a class="nav-btn" href="https://baphomet1984.github.io/systemtag/gate/?lvl=core&go=signal-core">
+      <span class="dot"></span><span>S.Core</span>
+    </a>
+    <a class="nav-btn" href="https://baphomet1984.github.io/shopping/">
+      <span class="dot"></span><span>Shopping</span>
+    </a>
+  </div>
+
+  <div class="network-meta">
+    <span><span class="pulse"></span> RED ACTIVA</span>
+    <span id="nodeCount">── NODOS CARGANDO</span>
+    <span>UPLINK · ESTABLE</span>
+  </div>
+
+  <div class="nodes-grid" id="alliadosContainer"></div>
+
+
+
+  <div class="cta-section">
+    <div class="cta-label">⌘ Protocolo de integración</div>
+    <div class="cta-title">Solicitar Acceso a la Red</div>
+    <p class="cta-desc">
+      El sistema analiza cada solicitud manualmente.<br>
+      Solo los proyectos que aporten valor real son integrados a la red.
+    </p>
+    <a class="cta-btn" href="https://chat.whatsapp.com/D7xEqrGxJgABFHbRQXM6tg?mode=gi_c">
+      ◉ Enviar solicitud al sistema
+    </a>
+  </div>
+
+      <!-- ══ MAP SECTION ══ -->
+<!-- ══ MAP FULL SCREEN ══ -->
+<div class="map-section">
+  <div id="map"></div>
+  <div class="map-overlay"></div>
+  <div class="map-corner tl"></div>
+  <div class="map-corner tr"></div>
+  <div class="map-corner bl"></div>
+  <div class="map-corner br"></div>
+  <div class="map-status">
+    <span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#00e5cc;animation:blink 1.5s infinite;vertical-align:middle;margin-right:6px"></span>
+    HUB.SYS · XONACATEPEC · SEÑALES DETECTADAS
+  </div>
+  <div class="map-coords" id="mapCoords">LAT 19.0872° N · LON 98.1039° W · ESCANEANDO...</div>
+  <div class="map-signal-count" id="signalCount">// 0 SEÑALES ACTIVAS</div>
+</div>
+
+  <div class="sys-footer">
+    RED_ALIADOS · hub.uplink · integración manual · solo señal real<br>
+    SYSTEM LOG · monitoring since 2025
+  </div>
+
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+//  LEAFLET MAP — dark military style, centered on Puebla
+// ══════════════════════════════════════════════════════════════════
+
+// HUB coordinates — Puebla, México
+const HUB_LAT = 19.0872;
+const HUB_LON = -98.1039;
+
+// Bounds that lock the view to Puebla state area
+const PUEBLA_BOUNDS = L.latLngBounds(
+  [19.0550, -98.1400],  // SW Xonacatepec
+  [19.1200, -98.0600]   // NE Xonacatepec
+);
+
+const map = L.map('map', {
+  center: [19.0872, -98.1039],
+  zoom: 13,
+  zoomControl: false,
+  attributionControl: false,
+  scrollWheelZoom: false,
+  dragging: false,
+  doubleClickZoom: false,
+  touchZoom: false,
+  minZoom: 12,
+  maxZoom: 12,
+  maxBounds: PUEBLA_BOUNDS,
+  maxBoundsViscosity: 1.0,
+});
+
+// Force correct view once tiles load
+map.whenReady(() => {
+  [100, 300, 600, 1000].forEach(delay => {
+    setTimeout(() => {
+      map.invalidateSize({ animate: false });
+      map.setView([19.0872, -98.1039], 13);
+    }, delay);
+  });
+});
+
+window.addEventListener('load', () => {
+  [200, 500, 1000].forEach(delay => {
+    setTimeout(() => {
+      map.invalidateSize({ animate: false });
+      map.setView([19.0872, -98.1039], 13);
+    }, delay);
+  });
+});
+
+// Also on resize (orientation change on mobile)
+window.addEventListener('resize', () => {
+  setTimeout(() => {
+    map.invalidateSize({ animate: false });
+    map.setView([19.0872, -98.1039], 13);
+  }, 200);
+});
+
+// Dark tile layer — CartoDB Dark Matter
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  subdomains: 'abcd',
+  maxZoom: 19
+}).addTo(map);
+
+// ── HUB marker ────────────────────────────────────────────────────
+function makeHubIcon() {
+  return L.divIcon({
+    className: '',
+    html: `<div class="hub-marker-wrap">
+             <div class="hub-pulse"></div>
+             <div class="hub-pulse"></div>
+             <div class="hub-pulse"></div>
+             <div class="hub-core"></div>
+           </div>`,
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
+  });
+}
+
+const hubMarker = L.marker([HUB_LAT, HUB_LON], { icon: makeHubIcon(), zIndexOffset: 1000 })
+  .addTo(map)
+  .bindPopup(`
+    <span class="pop-name">◈ HUB.SYS</span>
+    <span class="pop-status">// ORIGEN DE LA RED</span><br>
+    <span style="color:rgba(0,229,204,0.5)">LAT ${HUB_LAT}° N · LON ${Math.abs(HUB_LON)}° W</span><br>
+    <span style="color:rgba(0,229,204,0.5)">Xonacatepec, Puebla</span>
+  `, { maxWidth: 220 });
+
+// ── Signal marker for each ally ───────────────────────────────────
+function makeSignalIcon() {
+  return L.divIcon({
+    className: '',
+    html: `<div class="signal-marker-wrap">
+             <div class="signal-pulse"></div>
+             <div class="signal-pulse"></div>
+             <div class="signal-core"></div>
+           </div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7],
+  });
+}
+
+// ── Connection line from HUB to ally ─────────────────────────────
+function drawConnection(lat, lon) {
+  L.polyline(
+    [[HUB_LAT, HUB_LON], [lat, lon]],
+    {
+      color: '#00e5cc',
+      weight: 0.8,
+      opacity: 0.25,
+      dashArray: '4 8',
+    }
+  ).addTo(map);
+}
+
+// ── Coords ticker ─────────────────────────────────────────────────
+const coordEl = document.getElementById('mapCoords');
+function tickCoords() {
+  const lat = (Math.random() * 180 - 90).toFixed(4);
+  const lon = (Math.random() * 360 - 180).toFixed(4);
+  const ns  = lat >= 0 ? 'N' : 'S';
+  const ew  = lon >= 0 ? 'E' : 'W';
+  coordEl.textContent = `LAT ${Math.abs(lat)}° ${ns} · LON ${Math.abs(lon)}° ${ew} · ESCANEANDO...`;
+}
+setInterval(tickCoords, 2000);
+
+// ── Clock ─────────────────────────────────────────────────────────
+function tick() { document.getElementById('clock').textContent = new Date().toTimeString().slice(0,8); }
+setInterval(tick, 1000); tick();
+
+// ══════════════════════════════════════════════════════════════════
+//  LOAD ALIADOS — place markers + build cards
+// ══════════════════════════════════════════════════════════════════
+
+// Default scatter positions around Puebla if aliado has no lat/lon
+// Spread across Mexico / Latin America for visual effect
+const DEFAULT_POSITIONS = [
+  [19.0872, -98.1039],   // Presidencia Xonacatepec
+  [19.0920, -98.1080],   // Barrio Norte
+  [19.0840, -98.0990],   // Barrio Oriente
+  [19.0810, -98.1100],   // Barrio Sur
+  [19.0950, -98.1020],   // Col. San Miguel
+  [19.0880, -98.0960],   // Zona este
+  [19.0760, -98.1070],   // Zona sur
+  [19.0910, -98.1150],   // Zona oeste
+  [19.0830, -98.1000],   // Centro
+  [19.0970, -98.1060],   // Norte
+  [19.0800, -98.0980],   // Sur-oriente
+  [19.0855, -98.1120],   // Poniente
+  [19.0940, -98.0970],   // Nor-oriente
+  [19.0770, -98.1130],   // Sur-poniente
+  [19.0895, -98.1050],   // Presidencia auxiliar
+];
+
+async function cargarAliados() {
+  try {
+    const res     = await fetch("aliados.json?ts=" + Date.now());
+    const aliados = await res.json();
+    const container = document.getElementById("alliadosContainer");
+    const countEl   = document.getElementById("nodeCount");
+    const sigCount  = document.getElementById("signalCount");
+
+    countEl.textContent = `── ${aliados.length} NODO${aliados.length !== 1 ? 'S' : ''} DETECTADO${aliados.length !== 1 ? 'S' : ''}`;
+    sigCount.textContent = `// ${aliados.length} SEÑALES ACTIVAS`;
+
+    if (aliados.length === 0) {
+      container.innerHTML = '<div class="empty-state">// SIN NODOS REGISTRADOS · RED EN ESPERA</div>';
+      return;
+    }
+
+    aliados.forEach((a, i) => {
+      // Use lat/lon from JSON if available, else use default scatter
+      const pos = (a.lat && a.lon)
+        ? [parseFloat(a.lat), parseFloat(a.lon)]
+        : DEFAULT_POSITIONS[i % DEFAULT_POSITIONS.length];
+
+      // Draw connection line first (under marker)
+      drawConnection(pos[0], pos[1]);
+
+      // Place signal marker
+      const marker = L.marker(pos, { icon: makeSignalIcon() })
+        .addTo(map)
+        .bindPopup(`
+          <span class="pop-name">◈ ${a.nombre.toUpperCase()}</span>
+          <span class="pop-status">// SEÑAL DETECTADA · NODO_${String(i+1).padStart(3,'0')}</span><br>
+          <span style="color:rgba(0,229,204,0.5)">LAT ${pos[0].toFixed(4)}° · LON ${pos[1].toFixed(4)}°</span><br>
+          ${a.telefono ? `<br><span style="color:var(--green)">◉ ${a.telefono}</span>` : ''}
+          <a class="pop-link" href="${a.url}" target="_blank">→ CONECTAR</a>
+        `, { maxWidth: 220 });
+
+      // ── Card ──
+      const card = document.createElement("div");
+      card.className = "node-card";
+      card.style.animationDelay = `${i * 0.08}s`;
+      card.innerHTML = `
+        <div class="node-img-wrap">
+          <img src="${a.img}" alt="${a.nombre}"
+            onerror="this.parentElement.style.background='rgba(0,229,204,0.04)';this.style.display='none'">
+          <div class="node-tag">NODO_${String(i+1).padStart(3,'0')}</div>
+          <div class="node-status">activo</div>
+        </div>
+        <div class="node-body">
+          <div class="node-id">
+            LAT ${pos[0].toFixed(3)}° · LON ${pos[1].toFixed(3)}° · UPLINK:ESTABLE
+          </div>
+          <div class="node-name">${a.nombre}</div>
+          <div class="node-desc">${a.desc}</div>
+        </div>
+        ${a.telefono ? `<div class="node-phone"><a href="tel:${a.telefono}">${a.telefono}</a></div>` : '<div class="node-phone no-phone"></div>'}
+        <a class="node-btn" href="${a.url}" target="_blank">
+          <span>Conectar al nodo</span>
+        </a>
+      `;
+
+      // Click card → fly map to that marker and open popup
+      card.addEventListener('click', () => {
+        const mapEl = document.getElementById('map');
+        mapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+          map.invalidateSize();
+          map.flyTo(pos, 15, { duration: 1.2 });
+        }, 500);
+        setTimeout(() => marker.openPopup(), 1800);
+      });
+
+      container.appendChild(card);
+    });
+
+    initSearch(aliados.length);
+
+  } catch (err) {
+    console.error("Error cargando nodos:", err);
+    document.getElementById("alliadosContainer").innerHTML =
+      '<div class="empty-state">// ERROR · NO SE PUDO ESTABLECER CONEXIÓN CON aliados.json</div>';
+    document.getElementById("nodeCount").textContent = "── CONEXIÓN FALLIDA";
+    document.getElementById("signalCount").textContent = "// 0 SEÑALES ACTIVAS";
+  }
+}
+
+
+// ── SEARCH ────────────────────────────────────────────────────────
+function initSearch(total) {
+  const input = document.getElementById('searchInput');
+  const countEl = document.getElementById('searchCount');
+
+  function updateCount(visible) {
+    countEl.textContent = visible === total
+      ? `// ${total} nodos en red`
+      : `// ${visible} de ${total} nodos encontrados`;
+  }
+
+  updateCount(total);
+
+  input.addEventListener('input', () => {
+    const query = input.value.trim().toLowerCase();
+    const cards = document.querySelectorAll('.node-card');
+    let visible = 0;
+    cards.forEach(card => {
+      const name = card.querySelector('.node-name')?.textContent.toLowerCase() || '';
+      const desc = card.querySelector('.node-desc')?.textContent.toLowerCase() || '';
+      const match = !query || name.includes(query) || desc.includes(query);
+      card.classList.toggle('hidden-card', !match);
+      if (match) visible++;
+    });
+    updateCount(visible);
+  });
+}
+
+cargarAliados();
+// ── PODCAST PANEL ─────────────────────────────────────────────────
+(function(){
+    const pcPanel   = document.getElementById('podcast-panel');
+    const pcTab     = document.getElementById('podcast-tab');
+    const pcClose   = document.getElementById('podcast-close');
+    const pcOverlay = document.getElementById('podcast-overlay');
+
+    function openPanel()  { pcPanel.classList.add('open');    pcOverlay.classList.add('active');    }
+    function closePanel() { pcPanel.classList.remove('open'); pcOverlay.classList.remove('active'); }
+
+    pcTab.addEventListener('click',    () => pcPanel.classList.contains('open') ? closePanel() : openPanel());
+    pcClose.addEventListener('click',  closePanel);
+    pcOverlay.addEventListener('click', closePanel);
+
+    /* Luz dorada recorriendo el contorno */
+    const gc    = document.getElementById('tab-glow-canvas');
+    const gCtx  = gc.getContext('2d');
+    let gW, gH;
+
+    function resizeGC(){
+        gW = gc.width  = pcTab.offsetWidth  || 42;
+        gH = gc.height = pcTab.offsetHeight || 120;
+    }
+    resizeGC();
+    window.addEventListener('resize', resizeGC);
+
+    const PERIOD = 5000, SPARK = 0.22;
+
+    function perimPt(d, w, h){
+        d = ((d % (2*(w+h))) + 2*(w+h)) % (2*(w+h));
+        if (d < w)  return [d,   0  ];  d -= w;
+        if (d < h)  return [w,   d  ];  d -= h;
+        if (d < w)  return [w-d, h  ];  d -= w;
+                    return [0,   h-d];
+    }
+
+    function drawGlow(ts){
+        if(!gW || !gH) resizeGC();
+        gCtx.clearRect(0, 0, gW, gH);
+        const perim    = 2 * (gW + gH);
+        const sparkLen = perim * SPARK;
+        const headPos  = ((ts % PERIOD) / PERIOD) * perim;
+        const SEG      = 70;
+        gCtx.save();
+        for(let i = 0; i < SEG; i++){
+            const t  = i / SEG;
+            const d1 = (headPos - t * sparkLen + perim * 4) % perim;
+            const d2 = (headPos - (t + 1/SEG) * sparkLen + perim * 4) % perim;
+            const [x1,y1] = perimPt(d1, gW, gH);
+            const [x2,y2] = perimPt(d2, gW, gH);
+            const alpha  = Math.pow(1 - t, 1.4);
+            const bright = 1 - t * 0.4;
+            gCtx.beginPath();
+            gCtx.moveTo(x1, y1);
+            gCtx.lineTo(x2, y2);
+            gCtx.strokeStyle = `rgba(255,${Math.round(200+bright*55)},${Math.round(bright*40)},${alpha.toFixed(2)})`;
+            gCtx.lineWidth   = 2.5;
+            gCtx.shadowColor = `rgba(255,220,0,${(alpha*0.85).toFixed(2)})`;
+            gCtx.shadowBlur  = 12;
+            gCtx.stroke();
+        }
+        gCtx.restore();
+        requestAnimationFrame(drawGlow);
+    }
+    requestAnimationFrame(drawGlow);
+})();
+  
+</script>
+</body>
+</html>
