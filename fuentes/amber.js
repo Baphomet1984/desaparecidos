@@ -1,41 +1,41 @@
 const axios = require("axios")
 const cheerio = require("cheerio")
 
-async function obtenerAlertasAmber() {
+async function obtenerAmber(){
 
   const url = "https://alertaamber.gob.mx/"
-  const { data } = await axios.get(url)
 
-  const $ = cheerio.load(data)
+  const res = await axios.get(url,{
+    timeout:20000,
+    headers:{
+      "User-Agent":"Mozilla/5.0"
+    }
+  })
 
-  const resultados = []
+  const $ = cheerio.load(res.data)
 
-  $(".ficha").each((i, el) => {
+  let casos = []
 
-    const nombre = $(el).find(".nombre").text().trim()
-    const descripcion = $(el).find(".descripcion").text().trim()
+  $(".view-content .views-row").each((i,el)=>{
 
-    resultados.push({
+    const nombre = $(el).find(".views-field-title").text().trim()
+
+    const link = $(el).find("a").attr("href")
+
+    casos.push({
       nombre,
-      edad: null,
-      sexo: null,
-      estatus: "alerta",
-      fechaDesaparicion: new Date().toISOString().split("T")[0],
-      ultimaActualizacion: new Date().toISOString(),
-      descripcion,
-      ubicacion: "Puebla",
-      lat: null,
-      lon: null,
-      contacto: "",
-      foto: "",
-      url,
-      fuente: "Alerta Amber México",
-      fuenteTipo: "amber"
+      edad:null,
+      sexo:null,
+      lugar:null,
+      fecha_desaparicion:null,
+      fecha_reporte:null,
+      fuente:"Alerta Amber",
+      link:"https://alertaamber.gob.mx"+link
     })
 
   })
 
-  return resultados
+  return casos
 }
 
-module.exports = obtenerAlertasAmber
+module.exports = obtenerAmber
