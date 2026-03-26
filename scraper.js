@@ -1,57 +1,41 @@
-const obtenerAlertasAmber = require("./fuentes/amber.js")
-const {
-  cargarDB,
-  guardarDB,
-  existeCaso,
-  generarID
-} = require("./utils")
+const obtenerAmber = require("./fuentes/amber")
+const obtenerRNPDNO = require("./fuentes/rnpdno")
+const obtenerFiscalias = require("./fuentes/fiscalias")
+const obtenerNoticias = require("./fuentes/noticias")
+const obtenerTwitter = require("./fuentes/twitter")
 
 async function ejecutarScraper() {
 
-  const db = await cargarDB()
+  let resultados = []
 
-  const casos = await obtenerAlertasAmber()
+  try {
+    const amber = await obtenerAmber()
+    resultados.push(...amber)
+  } catch(e){}
 
-  for (const caso of casos) {
+  try {
+    const rnpdno = await obtenerRNPDNO()
+    resultados.push(...rnpdno)
+  } catch(e){}
 
-    const existente = existeCaso(
-      db,
-      caso.nombre,
-      caso.fechaDesaparicion
-    )
+  try {
+    const fiscalias = await obtenerFiscalias()
+    resultados.push(...fiscalias)
+  } catch(e){}
 
-    if (!existente) {
+  try {
+    const noticias = await obtenerNoticias()
+    resultados.push(...noticias)
+  } catch(e){}
 
-      const nuevo = {
-        id: generarID(db),
-        ...caso,
+  try {
+    const twitter = await obtenerTwitter()
+    resultados.push(...twitter)
+  } catch(e){}
 
-        historial: [
-          {
-            fecha: caso.fechaDesaparicion,
-            estatus: caso.estatus,
-            nota: "Registro inicial desde scraping"
-          }
-        ],
+  console.log("Casos encontrados:", resultados.length)
 
-        creadoEn: new Date().toISOString()
-      }
-
-      db.push(nuevo)
-
-      console.log("Scraper iniciando...", caso.nombre)
-
-    } else {
-
-      existente.ultimaActualizacion = new Date().toISOString()
-
-    }
-
-  }
-
-  await guardarDB(db)
-
-  console.log("Scraping terminado")
+  console.log(resultados)
 
 }
 
