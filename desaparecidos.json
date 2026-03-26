@@ -1,153 +1,37 @@
 [
   {
-    "id": "CASO_0101",
-    "nombre": "Geovana Yesenia Mendoza Mauleón",
-    "edad": 14,
+    "id": "CASO_0001",
+    "nombre": "María González Reyes",
+    "edad": 17,
     "sexo": "Femenino",
-    "status": "alerta",
-    "fechaDesaparicion": "2026-03-03",
-    "descripcion": "Cabello castaño oscuro lacio, ojos café, estatura aproximada 1.55 m. Señas particulares: cicatriz en labio superior y cicatriz en la frente. Vestía playera negra con estampado naranja, pants azul marino y tenis blancos.",
-    "ubicacion": "Col. Guadalupe Hidalgo, Puebla",
-    "lat": 19.037,
-    "lon": -98.209,
-    "contacto": "2222146405",
-    "foto": "",
-    "url": "https://m.municipiospuebla.mx/nota/sebusca/activan-alerta-amber-en-puebla-por-desaparicion-de-adolescente-de-14-anos"
-  },
-  {
-    "id": "CASO_0102",
-    "nombre": "Aline Margarita Morales Vázquez",
-    "edad": 15,
-    "sexo": "Femenino",
-    "status": "alerta",
-    "fechaDesaparicion": "2026-03-03",
-    "descripcion": "Cabello largo rizado castaño oscuro, ojos café. Señas particulares: lunar en mentón derecho, lunar en cuello y cicatriz visible.",
-    "ubicacion": "San Jerónimo Caleras, Puebla",
-    "lat": 19.094,
-    "lon": -98.221,
-    "contacto": "2222146405",
-    "foto": "",
-    "url": "https://www.debate.com.mx/estados/adolescentes-desaparecidos-en-puebla-activan-alerta-amber-para-localizar-a-geovana-alfonso-y-aline-20260305-0188.html"
-  },
-  {
-    "id": "CASO_0103",
-    "nombre": "Alfonso Domínguez Vargas",
-    "edad": 13,
-    "sexo": "Masculino",
-    "status": "alerta",
-    "fechaDesaparicion": "2026-02-28",
-    "descripcion": "Adolescente reportado desaparecido en Puebla. Se desconoce vestimenta al momento del reporte. Autoridades activaron Alerta Amber por riesgo a su integridad.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.041,
-    "lon": -98.206,
-    "contacto": "2222146405",
-    "foto": "",
-    "url": "https://www.tvazteca.com/aztecanoticias/alerta-amber-puebla-desaparicion-geovana-alfonso-aline-se-teme-integridad-menores/"
-  },
 
-  {
-    "id": "CASO_0104",
-    "nombre": "Cristian Montes Flores",
-    "edad": null,
-    "sexo": "Masculino",
-    "status": "desaparecido",
-    "fechaDesaparicion": "2026-03-04",
-    "descripcion": "Reportado como desaparecido en Puebla. Ficha de búsqueda activa emitida por la Fiscalía.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.041,
-    "lon": -98.206,
-    "contacto": "",
+    "estatus": "desaparecido",
+
+    "fechaDesaparicion": "2025-03-10",
+    "ultimaActualizacion": "2025-03-10",
+
+    "descripcion": "Cabello largo negro, complexión delgada, última vez vista con uniforme escolar azul. Señas particulares: lunar en mejilla derecha.",
+
+    "ubicacion": "Col. Las Flores, Xonacatepec, Puebla",
+    "lat": 19.091,
+    "lon": -98.108,
+
+    "contacto": "2221234567",
+
     "foto": "",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos"
-  },
-  {
-    "id": "CASO_0105",
-    "nombre": "José Ernesto López Zacarias",
-    "edad": null,
-    "sexo": "Masculino",
-    "status": "desaparecido",
-    "fechaDesaparicion": "2026-03-18",
-    "descripcion": "Persona reportada como desaparecida en Puebla. Caso listado en la base de búsqueda de la Fiscalía.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.041,
-    "lon": -98.206,
-    "contacto": "",
-    "foto": "",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos"
-  },
-  {
-    "id": "CASO_0106",
-    "nombre": "Delfino Díaz Altamirano",
-    "edad": null,
-    "sexo": "Masculino",
-    "status": "desaparecido",
-    "fechaDesaparicion": "2026-03-19",
-    "descripcion": "Reportado como desaparecido; ficha publicada por autoridades del estado.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.041,
-    "lon": -98.206,
-    "contacto": "",
-    "foto": "",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos"
-  },
-  {
-    "id": "CASO_0107",
-    "nombre": "Juan Crisóstomo Cruz Rico",
-    "edad": null,
-    "sexo": "Masculino",
-    "status": "desaparecido",
-    "fechaDesaparicion": "2026-03-20",
-    "descripcion": "Persona reportada como no localizada; ficha activa en base de desaparecidos de Puebla.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.041,
-    "lon": -98.206,
-    "contacto": "",
-    "foto": "",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos"
-  },
-  {
-    "id": "CASO_0108",
-    "nombre": "Óscar González Jarquin",
-    "edad": null,
-    "sexo": "Masculino",
-    "status": "desaparecido",
-    "fechaDesaparicion": "2026-01-27",
-    "descripcion": "Ficha de búsqueda activa publicada por la Fiscalía del Estado de Puebla.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.041,
-    "lon": -98.206,
-    "contacto": "",
-    "foto": "",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos"
-  },
-  {
-    "id": "CASO_0109",
-    "nombre": "Jorge Ortega Ramírez",
-    "edad": null,
-    "sexo": "Masculino",
-    "status": "desaparecido",
-    "fechaDesaparicion": "2026-03-01",
-    "descripcion": "Persona reportada como desaparecida y listada en registros oficiales.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.041,
-    "lon": -98.206,
-    "contacto": "",
-    "foto": "",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos"
-  },
-  {
-    "id": "CASO_0110",
-    "nombre": "Luis Eric Xique Balderas",
-    "edad": null,
-    "sexo": "Masculino",
-    "status": "desaparecido",
-    "fechaDesaparicion": "2026-03-19",
-    "descripcion": "Reportado como no localizado en Puebla.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.041,
-    "lon": -98.206,
-    "contacto": "",
-    "foto": "",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos"
+    "url": "",
+
+    "fuente": "Fiscalía General del Estado de Puebla",
+    "fuenteTipo": "ficha_busqueda",
+
+    "historial": [
+      {
+        "fecha": "2025-03-10",
+        "estatus": "desaparecido",
+        "nota": "Reporte inicial de desaparición"
+      }
+    ],
+
+    "creadoEn": "2025-03-10T08:00:00Z"
   }
 ]
