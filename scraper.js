@@ -39,7 +39,7 @@ async function ejecutarScraper() {
 
       db.push(nuevo)
 
-      console.log("Nuevo caso agregado:", caso.nombre)
+      console.log("Scraper iniciando...", caso.nombre)
 
     } else {
 
