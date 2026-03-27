@@ -352,4 +352,171 @@
       { "fecha": "2026-03-24", "estatus": "desaparecido", "nota": "Ficha más reciente publicada en micrositio FGE Puebla." }
     ]
   }
+
+{
+"id": "CASO_0001",
+"nombre": "Argelia Vargas",
+"edad": 30,
+"sexo": "Femenino",
+"estatus": "desaparecido",
+"fechaDesaparicion": "2026-03-19",
+"ultimaActualizacion": "2026-03-19",
+"descripcion": "Mujer reportada como desaparecida después de acudir a la feria de San José Chiapa.",
+"ubicacion": "San José Chiapa, Puebla",
+"lat": 19.241,
+"lon": -97.773,
+"contacto": "",
+"foto": "",
+"url": "https://www.proceso.com.mx",
+"fuente": "Medios de comunicación",
+"fuenteTipo": "noticia",
+"historial":[
+{
+"fecha":"2026-03-19",
+"estatus":"desaparecido",
+"nota":"Reporte inicial de desaparición"
+}
+]
+},
+
+{
+"id": "CASO_0002",
+"nombre": "Johana Ventura Martínez",
+"edad": 20,
+"sexo": "Femenino",
+"estatus": "desaparecido",
+"fechaDesaparicion": "2026-03-04",
+"ultimaActualizacion": "2026-03-04",
+"descripcion": "Reportada desaparecida tras ser sacada de su vivienda por un grupo armado junto con familiares.",
+"ubicacion": "Cuyoaco, Puebla",
+"lat": 19.600,
+"lon": -97.590,
+"contacto": "",
+"foto": "",
+"url": "https://www.proceso.com.mx",
+"fuente": "Medios de comunicación",
+"fuenteTipo": "noticia",
+"historial":[
+{
+"fecha":"2026-03-04",
+"estatus":"desaparecido",
+"nota":"Reporte inicial de desaparición"
+}
+]
+},
+
+{
+"id": "CASO_0003",
+"nombre": "Yeraldine Ventura Martínez",
+"edad": 9,
+"sexo": "Femenino",
+"estatus": "desaparecido",
+"fechaDesaparicion": "2026-03-04",
+"ultimaActualizacion": "2026-03-04",
+"descripcion": "Niña reportada desaparecida tras ser sustraída de su vivienda junto con su familia.",
+"ubicacion": "Cuyoaco, Puebla",
+"lat": 19.600,
+"lon": -97.590,
+"contacto": "",
+"foto": "",
+"url": "https://www.proceso.com.mx",
+"fuente": "Medios de comunicación",
+"fuenteTipo": "noticia",
+"historial":[
+{
+"fecha":"2026-03-04",
+"estatus":"desaparecido",
+"nota":"Reporte inicial de desaparición"
+}
+]
+},
+
+{
+"id": "CASO_0004",
+"nombre": "Félix Ventura Martínez",
+"edad": null,
+"sexo": "Masculino",
+"estatus": "desaparecido",
+"fechaDesaparicion": "2026-03-04",
+"ultimaActualizacion": "2026-03-04",
+"descripcion": "Padre de familia reportado desaparecido tras ser llevado por un comando armado.",
+"ubicacion": "Cuyoaco, Puebla",
+"lat": 19.600,
+"lon": -97.590,
+"contacto": "",
+"foto": "",
+"url": "https://www.proceso.com.mx",
+"fuente": "Medios de comunicación",
+"fuenteTipo": "noticia",
+"historial":[
+{
+"fecha":"2026-03-04",
+"estatus":"desaparecido",
+"nota":"Reporte inicial de desaparición"
+}
+]
+},
+
+{
+"id": "CASO_0005",
+"nombre": "Lluvia Yareni",
+"edad": 8,
+"sexo": "Femenino",
+"estatus": "desaparecido",
+"fechaDesaparicion": "2024-11-01",
+"ultimaActualizacion": "2025-02-17",
+"descripcion": "Niña reportada como desaparecida en Huauchinango; posteriormente fue localizada sin vida.",
+"ubicacion": "Huauchinango, Puebla",
+"lat": 20.177,
+"lon": -98.053,
+"contacto": "",
+"foto": "",
+"url": "https://www.infobae.com",
+"fuente": "Medios de comunicación",
+"fuenteTipo": "noticia",
+"historial":[
+{
+"fecha":"2024-11-01",
+"estatus":"desaparecido",
+"nota":"Reporte inicial"
+},
+{
+"fecha":"2025-02-17",
+"estatus":"localizado_sin_vida",
+"nota":"Hallazgo del cuerpo"
+}
+]
+},
+
+{
+"id": "CASO_0006",
+"nombre": "José Martín Jiménez González",
+"edad": 50,
+"sexo": "Masculino",
+"estatus": "desaparecido",
+"fechaDesaparicion": "2018-11-22",
+"ultimaActualizacion": "2025-11-08",
+"descripcion": "Comerciante desaparecido tras viajar a Tepeaca; localizado años después tras búsqueda familiar.",
+"ubicacion": "Tepeaca, Puebla",
+"lat": 18.966,
+"lon": -97.899,
+"contacto": "",
+"foto": "",
+"url": "https://www.pueblaonline.com.mx",
+"fuente": "Medios de comunicación",
+"fuenteTipo": "noticia",
+"historial":[
+{
+"fecha":"2018-11-22",
+"estatus":"desaparecido",
+"nota":"Reporte inicial"
+},
+{
+"fecha":"2025-11-08",
+"estatus":"localizado_sin_vida",
+"nota":"Confirmación por ADN"
+}
+]
+}
+
 ]
