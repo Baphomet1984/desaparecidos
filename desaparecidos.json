@@ -517,6 +517,161 @@
 "nota":"Confirmación por ADN"
 }
 ]
+},
+  
+{
+"id": "CASO_1001",
+"nombre": "Johana Ventura Martínez",
+"edad": 20,
+"sexo": "Femenino",
+"estatus": "localizado_sin_vida",
+"fechaDesaparicion": "2026-03-04",
+"ultimaActualizacion": "2026-03-23",
+"descripcion": "Reportada desaparecida tras ser privada de la libertad por un grupo armado; posteriormente localizada sin vida junto con familiares.",
+"ubicacion": "Cuyoaco, Puebla",
+"lat": 19.600,
+"lon": -97.590,
+"contacto": "",
+"foto": "",
+"url": "https://www.nmas.com.mx/puebla/localizan-muertas-a-tres-mujeres-madre-y-dos-hijas-en-la-caldera-limites-puebla-tlaxcala-desaparecidas-en-cuyoaco/",
+"fuente": "N+ Noticias",
+"fuenteTipo": "noticia",
+"historial":[
+{
+"fecha":"2026-03-04",
+"estatus":"desaparecido",
+"nota":"Reporte inicial"
+},
+{
+"fecha":"2026-03-23",
+"estatus":"localizado_sin_vida",
+"nota":"Hallazgo en zona limítrofe Puebla–Tlaxcala"
 }
-
 ]
+},
+
+{
+"id": "CASO_1002",
+"nombre": "Yeraldine Ventura Martínez",
+"edad": 9,
+"sexo": "Femenino",
+"estatus": "localizado_sin_vida",
+"fechaDesaparicion": "2026-03-04",
+"ultimaActualizacion": "2026-03-23",
+"descripcion": "Menor reportada desaparecida tras ataque armado; localizada sin vida en zona rural.",
+"ubicacion": "Cuyoaco, Puebla",
+"lat": 19.600,
+"lon": -97.590,
+"contacto": "",
+"foto": "",
+"url": "https://www.nmas.com.mx/puebla/localizan-muertas-a-tres-mujeres-madre-y-dos-hijas-en-la-caldera-limites-puebla-tlaxcala-desaparecidas-en-cuyoaco/",
+"fuente": "N+ Noticias",
+"fuenteTipo": "noticia",
+"historial":[
+{
+"fecha":"2026-03-04",
+"estatus":"desaparecido",
+"nota":"Reporte inicial"
+},
+{
+"fecha":"2026-03-23",
+"estatus":"localizado_sin_vida",
+"nota":"Confirmación por autoridades"
+}
+]
+},
+
+{
+"id": "CASO_1003",
+"nombre": "Lluvia Yareni",
+"edad": 8,
+"sexo": "Femenino",
+"estatus": "localizado_sin_vida",
+"fechaDesaparicion": "2024-11-01",
+"ultimaActualizacion": "2025-02-17",
+"descripcion": "Niña reportada como desaparecida en Huauchinango; localizada posteriormente sin vida.",
+"ubicacion": "Huauchinango, Puebla",
+"lat": 20.177,
+"lon": -98.053,
+"contacto": "",
+"foto": "",
+"url": "https://www.infobae.com",
+"fuente": "Medios de comunicación",
+"fuenteTipo": "noticia",
+"historial":[
+{
+"fecha":"2024-11-01",
+"estatus":"desaparecido",
+"nota":"Reporte inicial"
+},
+{
+"fecha":"2025-02-17",
+"estatus":"localizado_sin_vida",
+"nota":"Hallazgo confirmado por autoridades"
+}
+]
+},
+
+{
+"id": "CASO_1004",
+"nombre": "José Ignacio Rosales Paredes",
+"edad": null,
+"sexo": "Masculino",
+"estatus": "localizado_con_vida",
+"fechaDesaparicion": "2025-12-10",
+"ultimaActualizacion": "2026-01-15",
+"descripcion": "Persona reportada como desaparecida en Puebla y posteriormente localizada con vida.",
+"ubicacion": "Puebla, Puebla",
+"lat": 19.041,
+"lon": -98.206,
+"contacto": "",
+"foto": "",
+"url": "https://fiscalia.puebla.gob.mx/Desaparecidos",
+"fuente": "Fiscalía General del Estado de Puebla",
+"fuenteTipo": "ficha_busqueda",
+"historial":[
+{
+"fecha":"2025-12-10",
+"estatus":"desaparecido",
+"nota":"Reporte inicial"
+},
+{
+"fecha":"2026-01-15",
+"estatus":"localizado_con_vida",
+"nota":"Localización reportada por autoridades"
+}
+]
+},
+
+{
+"id": "CASO_1005",
+"nombre": "Miguel Pérez Eucevió",
+"edad": null,
+"sexo": "Masculino",
+"estatus": "localizado_con_vida",
+"fechaDesaparicion": "2025-11-21",
+"ultimaActualizacion": "2025-12-03",
+"descripcion": "Persona reportada como desaparecida y posteriormente localizada con vida.",
+"ubicacion": "Puebla, Puebla",
+"lat": 19.041,
+"lon": -98.206,
+"contacto": "",
+"foto": "",
+"url": "https://fiscalia.puebla.gob.mx/Desaparecidos",
+"fuente": "Fiscalía General del Estado de Puebla",
+"fuenteTipo": "ficha_busqueda",
+"historial":[
+{
+"fecha":"2025-11-21",
+"estatus":"desaparecido",
+"nota":"Reporte inicial"
+},
+{
+"fecha":"2025-12-03",
+"estatus":"localizado_con_vida",
+"nota":"Localización confirmada"
+}
+]
+}
+]
+
