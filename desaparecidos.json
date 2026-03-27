@@ -397,9 +397,12 @@
 "sexo":"Femenino",
 "estatus":"localizado_sin_vida",
 "fechaDesaparicion":"2026-03-04",
+"fechaLocalizacion":"2026-03-23",
 "ultimaActualizacion":"2026-03-23",
-"descripcion":"Privada de la libertad junto con familiares.",
+"descripcion":"Privada de la libertad junto con familiares durante ataque armado.",
+"descripcionHallazgo":"Localizada sin vida tras operativo de búsqueda. Autoridades confirmaron identidad posteriormente.",
 "ubicacion":"Cuyoaco, Puebla",
+"lugarHallazgo":"Zona rural de Cuyoaco, Puebla",
 "lat":19.6,
 "lon":-97.59,
 "contacto":"",
@@ -409,8 +412,8 @@
 "fuenteTipo":"noticia",
 "noReporte":"",
 "historial":[
-{"fecha":"2026-03-04","estatus":"desaparecido","nota":"Reporte inicial"},
-{"fecha":"2026-03-23","estatus":"localizado_sin_vida","nota":"Hallazgo"}
+{"fecha":"2026-03-04","estatus":"desaparecido","nota":"Reporte inicial tras ataque armado"},
+{"fecha":"2026-03-23","estatus":"localizado_sin_vida","nota":"Autoridades confirman hallazgo e identificación"}
 ]
 },
 
@@ -421,9 +424,12 @@
 "sexo":"Femenino",
 "estatus":"localizado_sin_vida",
 "fechaDesaparicion":"2026-03-04",
+"fechaLocalizacion":"2026-03-23",
 "ultimaActualizacion":"2026-03-23",
-"descripcion":"Menor desaparecida en ataque armado.",
+"descripcion":"Menor desaparecida durante ataque armado contra su familia.",
+"descripcionHallazgo":"Localizada sin vida durante las investigaciones del caso familiar.",
 "ubicacion":"Cuyoaco, Puebla",
+"lugarHallazgo":"Zona rural de Cuyoaco, Puebla",
 "lat":19.6,
 "lon":-97.59,
 "contacto":"",
@@ -434,9 +440,10 @@
 "noReporte":"",
 "historial":[
 {"fecha":"2026-03-04","estatus":"desaparecido","nota":"Reporte inicial"},
-{"fecha":"2026-03-23","estatus":"localizado_sin_vida","nota":"Confirmación"}
+{"fecha":"2026-03-23","estatus":"localizado_sin_vida","nota":"Confirmación oficial del hallazgo"}
 ]
 },
+
 
 {
 "id":"CASO_0020",
@@ -492,9 +499,12 @@
 "sexo":"Masculino",
 "estatus":"localizado_sin_vida",
 "fechaDesaparicion":"2018-11-22",
+"fechaLocalizacion":"2025-11-08",
 "ultimaActualizacion":"2025-11-08",
-"descripcion":"Comerciante desaparecido en Tepeaca.",
+"descripcion":"Comerciante reportado desaparecido en Tepeaca.",
+"descripcionHallazgo":"Restos humanos localizados previamente fueron identificados mediante pruebas de ADN.",
 "ubicacion":"Tepeaca, Puebla",
+"lugarHallazgo":"Tepeaca, Puebla",
 "lat":18.966,
 "lon":-97.899,
 "contacto":"",
@@ -505,7 +515,7 @@
 "noReporte":"",
 "historial":[
 {"fecha":"2018-11-22","estatus":"desaparecido","nota":"Reporte inicial"},
-{"fecha":"2025-11-08","estatus":"localizado_sin_vida","nota":"Confirmación ADN"}
+{"fecha":"2025-11-08","estatus":"localizado_sin_vida","nota":"Identificación mediante ADN"}
 ]
 },
 
@@ -555,6 +565,102 @@
 {"fecha":"2025-11-21","estatus":"desaparecido","nota":"Reporte inicial"},
 {"fecha":"2025-12-03","estatus":"localizado_con_vida","nota":"Localización confirmada"}
 ]
-}
+},
 
+{
+"id":"CASO_0025",
+"nombre": "Félix N",
+"edad": 42,
+"sexo": "F",
+"estado": "Puebla",
+"municipio": "Cuyoaco",
+"estatus": "localizado sin vida",
+"fecha_desaparicion": "2026-03-04",
+"fecha_localizacion": "2026-03-22",
+"lat": 19.616,
+"lng": -97.592,
+"descripcion": "Privada de la libertad junto con sus hijas. Los cuerpos fueron localizados en un paraje rural conocido como La Caldera, en los límites de Puebla y Tlaxcala.",
+"tipo_hallazgo": "campo",
+"fuente": "nota periodistica"
+},
+{
+"id":"CASO_0026",
+"nombre": "Johana Maria N",
+"edad": 20,
+"sexo": "F",
+"estado": "Puebla",
+"municipio": "Cuyoaco",
+"estatus": "localizado sin vida",
+"fecha_desaparicion": "2026-03-04",
+"fecha_localizacion": "2026-03-22",
+"lat": 19.616,
+"lng": -97.592,
+"descripcion": "Desapareció junto con su madre y hermana. El cuerpo fue encontrado en un paraje rural tras un operativo de búsqueda.",
+"tipo_hallazgo": "campo",
+"fuente": "nota periodistica"
+},
+{
+"id":"CASO_0027",
+"nombre": "Yeraldin N",
+"edad": 9,
+"sexo": "F",
+"estado": "Puebla",
+"municipio": "Cuyoaco",
+"estatus": "localizado sin vida",
+"fecha_desaparicion": "2026-03-04",
+"fecha_localizacion": "2026-03-22",
+"lat": 19.616,
+"lng": -97.592,
+"descripcion": "Menor desaparecida junto con su familia. Fue localizada sin vida en una zona despoblada durante un operativo de búsqueda.",
+"tipo_hallazgo": "campo",
+"fuente": "nota periodistica"
+},
+{
+"id":"CASO_0028",
+"nombre": "Alejandro N",
+"edad": 79,
+"sexo": "M",
+"estado": "Puebla",
+"municipio": "Chietla",
+"estatus": "localizado sin vida",
+"fecha_desaparicion": "2026-01-25",
+"fecha_localizacion": "2026-01-27",
+"lat": 18.520,
+"lng": -98.550,
+"descripcion": "Campesinos localizaron el cuerpo en una barranca de difícil acceso. Autoridades confirmaron posteriormente su identidad.",
+"tipo_hallazgo": "barranca",
+"fuente": "nota periodistica"
+},
+{
+"id":"CASO_0029",
+"nombre": "Persona identificada posteriormente",
+"edad": 55,
+"sexo": "M",
+"estado": "Puebla",
+"municipio": "Puebla",
+"estatus": "localizado sin vida",
+"fecha_desaparicion": "2026-03-15",
+"fecha_localizacion": "2026-03-16",
+"lat": 19.065,
+"lng": -98.204,
+"descripcion": "Hombre encontrado sin signos vitales en vía pública cerca del Mercado Hidalgo. Vecinos realizaron el reporte a las autoridades.",
+"tipo_hallazgo": "via_publica",
+"fuente": "nota periodistica"
+},
+{
+"id":"CASO_0030",
+"nombre": "Pareja identificada por autoridades",
+"edad": 35,
+"sexo": "M/F",
+"estado": "Puebla",
+"municipio": "Chignahuapan",
+"estatus": "localizado sin vida",
+"fecha_desaparicion": "2026-02-18",
+"fecha_localizacion": "2026-02-20",
+"lat": 19.838,
+"lng": -98.030,
+"descripcion": "Dos cuerpos fueron encontrados en una zona rural conocida como Rinconada Puebla. Fueron trasladados al SEMEFO para identificación.",
+"tipo_hallazgo": "campo",
+"fuente": "reporte policial"
+}
 ]
