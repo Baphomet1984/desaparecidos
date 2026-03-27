@@ -1,3 +1,4 @@
+const { analizarTextoNoticia } = require("../utils/nlp")
 const axios = require("axios")
 
 async function obtenerNoticias(){
@@ -18,16 +19,18 @@ async function obtenerNoticias(){
 
     if(title){
 
-      casos.push({
-        nombre:title[1],
-        edad:null,
-        sexo:null,
-        lugar:null,
-        fecha_desaparicion:null,
-        fecha_reporte:null,
-        fuente:"Noticias",
-        link:null
-      })
+     const analisis = analizarTextoNoticia(titulo)
+
+casos.push({
+nombre: analisis.nombre || titulo,
+edad:null,
+sexo: analisis.sexo,
+lugar: analisis.lugar,
+fecha_desaparicion:null,
+fecha_reporte:null,
+fuente:"Noticias",
+link:null
+})
 
     }
 
