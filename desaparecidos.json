@@ -1,360 +1,5 @@
-[
-  {
-    "id": "CASO_0001",
-    "nombre": "Crystel Guadalupe Ponce Villar",
-    "edad": 15,
-    "sexo": "Femenino",
-    "estatus": "alerta",
-    "fechaDesaparicion": "2026-01-07",
-    "ultimaActualizacion": "2026-01-09",
-    "descripcion": "Cabello largo lacio castaño oscuro, ojos café, estatura 1.57 m. Señas particulares: cicatriz en la parte media de la frente.",
-    "ubicacion": "Col. Ex Hacienda Las Fuentes I, Puebla capital",
-    "lat": 19.0781,
-    "lon": -98.2051,
-    "contacto": "222-226-2626",
-    "foto": "",
-    "url": "https://municipiospuebla.mx/nota/puebla/activan-alerta-amber-en-puebla-por-la-desaparicion-de-crystel-de-15-anos",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "alerta_amber",
-    "noReporte": "FGEP/AAMBER-PUE/---/2026",
-    "historial": [
-      { "fecha": "2026-01-07", "estatus": "alerta", "nota": "Vista por última vez en Col. Ex Hacienda Las Fuentes I. Alerta Amber activada." }
-    ]
-  },
-  {
-    "id": "CASO_0002",
-    "nombre": "Victoria Flores Cruz",
-    "edad": 15,
-    "sexo": "Femenino",
-    "estatus": "alerta",
-    "fechaDesaparicion": "2026-01-20",
-    "ultimaActualizacion": "2026-01-22",
-    "descripcion": "Cabello negro lacio largo mediano, ojos café, estatura 1.60 m. Nacida el 2 de enero de 2011. Se teme por su integridad ante posible comisión de delito.",
-    "ubicacion": "Cuautlancingo, Puebla",
-    "lat": 19.1067,
-    "lon": -98.2659,
-    "contacto": "222-226-2626",
-    "foto": "",
-    "url": "https://www.tvazteca.com/aztecanoticias/urgente-activan-alerta-amber-3-menores-desaparecidos-en-puebla-en-una-semana",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "alerta_amber",
-    "noReporte": "FGEP/AAMBER-PUE/---/2026",
-    "historial": [
-      { "fecha": "2026-01-20", "estatus": "alerta", "nota": "Reportada desaparecida en Cuautlancingo. Alerta Amber activada el 22 de enero 2026." }
-    ]
-  },
-  {
-    "id": "CASO_0003",
-    "nombre": "Cecilia Santiago Cruz",
-    "edad": 16,
-    "sexo": "Femenino",
-    "estatus": "alerta",
-    "fechaDesaparicion": "2026-02-16",
-    "ultimaActualizacion": "2026-02-19",
-    "descripcion": "Cabello negro lacio mediano, ojos café, estatura 1.60 m. Nacida 10 feb 2010. Señas: tatuaje pantorrilla derecha (corazón verde-rojo), lunar negro en nariz izquierda, lunar café nariz derecha.",
-    "ubicacion": "Cuautlancingo, Puebla",
-    "lat": 19.1040,
-    "lon": -98.2570,
-    "contacto": "222-226-2626",
-    "foto": "",
-    "url": "https://municipiospuebla.mx/nota/sebusca/activan-alerta-amber-por-desaparicion-de-adolescente-en-cuautlancingo",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "alerta_amber",
-    "noReporte": "FGEP/AAMBER-PUE/043/2026",
-    "historial": [
-      { "fecha": "2026-02-16", "estatus": "alerta", "nota": "Vista por última vez en Cuautlancingo. Alerta Amber 043/2026 activada." }
-    ]
-  },
-  {
-    "id": "CASO_0004",
-    "nombre": "Guadalupe Laritza Sánchez Flores",
-    "edad": 15,
-    "sexo": "Femenino",
-    "estatus": "alerta",
-    "fechaDesaparicion": "2026-02-18",
-    "ultimaActualizacion": "2026-02-20",
-    "descripcion": "Cabello largo ondulado rubio, ojos café oscuro, estatura 1.62 m. Nacida 2 julio 2010. Señas: piercing en nariz lado izquierdo. Vestía sudadera blanca, chamarra mezclilla azul con brillos, pantalón mezclilla, tenis blancos, mochila rosa con blanco.",
-    "ubicacion": "Fracc. Paseos de Castillotla, Puebla capital",
-    "lat": 19.0530,
-    "lon": -98.2490,
-    "contacto": "222-226-2626",
-    "foto": "",
-    "url": "https://municipiospuebla.mx/nota/puebla/activan-alerta-amber-en-puebla-por-desaparicion-de-guadalupe-de-15-anos",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "alerta_amber",
-    "noReporte": "FGEP/AAMBER-PUE/046/2026",
-    "historial": [
-      { "fecha": "2026-02-18", "estatus": "alerta", "nota": "Vista por última vez en Fracc. Paseos de Castillotla. Alerta Amber 046/2026." }
-    ]
-  },
-  {
-    "id": "CASO_0005",
-    "nombre": "Karla Paris Enríquez García",
-    "edad": 16,
-    "sexo": "Femenino",
-    "estatus": "alerta",
-    "fechaDesaparicion": "2026-02-27",
-    "ultimaActualizacion": "2026-02-28",
-    "descripcion": "Cabello largo lacio castaño, ojos café, estatura 1.50 m. Nacida 8 abril 2009. Señas: tatuaje letra 'M' en brazo izq., dos mariposas formando corazón en brazo der., número '11 11' en muñeca izq., número '444' en tatuaje adicional.",
-    "ubicacion": "Col. Playas del Sur, Puebla capital",
-    "lat": 19.0498,
-    "lon": -98.2135,
-    "contacto": "222-226-2626",
-    "foto": "",
-    "url": "https://municipiospuebla.mx/nota/puebla/activan-alerta-amber-por-la-desaparicion-de-adolescente-de-16-anos-en-puebla",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "alerta_amber",
-    "noReporte": "FGEP/AAMBER-PUE/051/2026",
-    "historial": [
-      { "fecha": "2026-02-27", "estatus": "alerta", "nota": "Vista por última vez en Col. Playas del Sur. Alerta Amber 051/2026." }
-    ]
-  },
-  {
-    "id": "CASO_0006",
-    "nombre": "Geovana Yesenia Mendoza Mauleon",
-    "edad": 14,
-    "sexo": "Femenino",
-    "estatus": "alerta",
-    "fechaDesaparicion": "2026-03-03",
-    "ultimaActualizacion": "2026-03-05",
-    "descripcion": "Cabello lacio mediano castaño oscuro, ojos café, estatura 1.55 m. Nacida 3 mayo 2011. Señas: cicatriz en labio superior y en parte media de la frente. Vestía playera negra con estampado naranja, pants azul marino con franja blanca, tenis blancos.",
-    "ubicacion": "Col. Guadalupe Hidalgo, Puebla capital",
-    "lat": 19.0628,
-    "lon": -98.1892,
-    "contacto": "222-226-2626",
-    "foto": "",
-    "url": "https://municipiospuebla.mx/nota/sebusca/activan-alerta-amber-en-puebla-por-desaparicion-de-adolescente-de-14-anos",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "alerta_amber",
-    "noReporte": "FGEP/AAMBER-PUE/060/2026",
-    "historial": [
-      { "fecha": "2026-03-03", "estatus": "alerta", "nota": "Vista por última vez en Col. Guadalupe Hidalgo. Alerta Amber 060/2026." }
-    ]
-  },
-  {
-    "id": "CASO_0007",
-    "nombre": "Anahí Sánchez Díaz",
-    "edad": 15,
-    "sexo": "Femenino",
-    "estatus": "alerta",
-    "fechaDesaparicion": "2026-03-15",
-    "ultimaActualizacion": "2026-03-17",
-    "descripcion": "Cabello lacio castaño oscuro, ojos café, estatura 1.50 m. Nacida 27 agosto 2010. Señas: lunar en muñeca de mano derecha. Vestía suéter blanco, pantalón mezclilla azul claro y tenis blancos.",
-    "ubicacion": "Col. Miguel Hidalgo, Puebla capital",
-    "lat": 19.0681,
-    "lon": -98.2012,
-    "contacto": "222-226-2626",
-    "foto": "",
-    "url": "https://municipiospuebla.mx/nota/puebla/activan-alerta-amber-en-puebla-para-localizar-anahi-desaparecida-en-puebla-capital",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "alerta_amber",
-    "noReporte": "FGEP/AAMBER-PUE/---/2026",
-    "historial": [
-      { "fecha": "2026-03-15", "estatus": "alerta", "nota": "Vista por última vez en Col. Miguel Hidalgo. Alerta Amber activa." }
-    ]
-  },
-  {
-    "id": "CASO_0008",
-    "nombre": "Jesús Sánchez Martínez",
-    "edad": 17,
-    "sexo": "Masculino",
-    "estatus": "alerta",
-    "fechaDesaparicion": "2026-03-15",
-    "ultimaActualizacion": "2026-03-18",
-    "descripcion": "Cabello corto lacio negro, ojos café, estatura 1.55 m. Señas: cicatriz por quemadura en hombro derecho. Vestía sudadera negra, chaleco de estambre azul marino, playera blanca, pantalón gabardina caqui y tenis azules.",
-    "ubicacion": "Col. Nueva Jerusalén, Puebla capital",
-    "lat": 19.0724,
-    "lon": -98.1755,
-    "contacto": "222-226-2626",
-    "foto": "",
-    "url": "https://www.tvazteca.com/aztecanoticias/desaparecen-4-adolescentes-en-puebla-ya-se-activo-la-alerta-amber",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "alerta_amber",
-    "noReporte": "FGEP/AAMBER-PUE/---/2026",
-    "historial": [
-      { "fecha": "2026-03-15", "estatus": "alerta", "nota": "Visto por última vez en Col. Nueva Jerusalén. Alerta Amber activa." }
-    ]
-  },
-  {
-    "id": "CASO_0009",
-    "nombre": "Coral Guadalupe García Sánchez",
-    "edad": 15,
-    "sexo": "Femenino",
-    "estatus": "alerta",
-    "fechaDesaparicion": "2026-03-18",
-    "ultimaActualizacion": "2026-03-25",
-    "descripcion": "Cabello largo lacio negro, ojos café oscuro, estatura 1.60 m. Señas: cicatriz en párpado derecho, lunar en lado derecho del mentón. Vestía sudadera color coral, pantalón de vestir verde y tenis blancos con franja rosa.",
-    "ubicacion": "Cuautlancingo, Puebla",
-    "lat": 19.1020,
-    "lon": -98.2580,
-    "contacto": "222-226-2626",
-    "foto": "",
-    "url": "https://www.aztecapuebla.com/noticias/desaparece-la-menor-coral-guadalupe-garcia-en-cuautlancingo-activan-alerta-amber/",
-    "fuente": "Fiscalía General del Estado de Puebla / TV Azteca Puebla",
-    "fuenteTipo": "alerta_amber",
-    "noReporte": "FGEP/AAMBER-PUE/---/2026",
-    "historial": [
-      { "fecha": "2026-03-18", "estatus": "alerta", "nota": "Vista por última vez en Cuautlancingo. Alerta Amber activa al 25 mar 2026." }
-    ]
-  },
-  {
-    "id": "CASO_0010",
-    "nombre": "Raúl Santos Parra",
-    "edad": 35,
-    "sexo": "Masculino",
-    "estatus": "desaparecido",
-    "fechaDesaparicion": "2025-09-01",
-    "ultimaActualizacion": "2026-01-06",
-    "descripcion": "Desaparecido desde septiembre 2025. Señas: cicatriz en nariz con fosa nasal unida por accidente, dientes partidos a la mitad, cicatriz en rodilla izquierda en forma de círculo.",
-    "ubicacion": "U.H. Agua Santa, Puebla capital",
-    "lat": 19.0840,
-    "lon": -98.2213,
-    "contacto": "222-246-3830",
-    "foto": "",
-    "url": "https://www.diariocambio.com.mx/2026/policiaca/puebla-inicia-el-2026-con-tres-fichas-de-busqueda-desaparecieron-a-finales-del-2025/",
-    "fuente": "Comisión de Búsqueda de Personas del Estado de Puebla",
-    "fuenteTipo": "ficha_busqueda",
-    "noReporte": "CBP-003/2026",
-    "historial": [
-      { "fecha": "2025-09-01", "estatus": "desaparecido", "nota": "Última vez visto en U.H. Agua Santa." },
-      { "fecha": "2026-01-06", "estatus": "desaparecido", "nota": "Expediente CBP-003/2026 abierto. Ficha publicada." }
-    ]
-  },
-  {
-    "id": "CASO_0011",
-    "nombre": "Oscar González Jarquín",
-    "edad": null,
-    "sexo": "Masculino",
-    "estatus": "desaparecido",
-    "fechaDesaparicion": "2026-01-27",
-    "ultimaActualizacion": "2026-01-27",
-    "descripcion": "Reportado como desaparecido. Ficha activa en micrositio oficial de desaparecidos de la FGE Puebla.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.0520,
-    "lon": -98.1880,
-    "contacto": "222-226-2626",
-    "foto": "https://fiscalia.puebla.gob.mx/Desaparecidos/Home/ObtenerImagenRostro/70446392-2bcc-4e0b-def3-08de8aa6c611",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "ficha_busqueda",
-    "noReporte": "FGEP/---/2026",
-    "historial": [
-      { "fecha": "2026-01-27", "estatus": "desaparecido", "nota": "Ficha activa en micrositio FGE Puebla." }
-    ]
-  },
-  {
-    "id": "CASO_0012",
-    "nombre": "Jorge Ortega Ramírez",
-    "edad": null,
-    "sexo": "Masculino",
-    "estatus": "desaparecido",
-    "fechaDesaparicion": "2026-03-01",
-    "ultimaActualizacion": "2026-03-01",
-    "descripcion": "Reportado como desaparecido el 1 de marzo 2026. Ficha activa en micrositio oficial de la FGE Puebla.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.0601,
-    "lon": -98.1931,
-    "contacto": "222-226-2626",
-    "foto": "https://fiscalia.puebla.gob.mx/Desaparecidos/Home/ObtenerImagenRostro/7d372853-2f5f-450f-097e-08de89171cad",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "ficha_busqueda",
-    "noReporte": "FGEP/---/2026",
-    "historial": [
-      { "fecha": "2026-03-01", "estatus": "desaparecido", "nota": "Ficha activa en micrositio FGE Puebla." }
-    ]
-  },
-  {
-    "id": "CASO_0013",
-    "nombre": "Richy Zenet Hernandez Carcaño",
-    "edad": null,
-    "sexo": "Masculino",
-    "estatus": "desaparecido",
-    "fechaDesaparicion": "2026-02-28",
-    "ultimaActualizacion": "2026-02-28",
-    "descripcion": "Reportado como desaparecido el 28 de febrero 2026. Ficha activa en micrositio oficial de la FGE Puebla.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.0559,
-    "lon": -98.2048,
-    "contacto": "222-226-2626",
-    "foto": "https://fiscalia.puebla.gob.mx/Desaparecidos/Home/ObtenerImagenRostro/49979ce2-7f34-4f5d-096d-08de89171cad",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "ficha_busqueda",
-    "noReporte": "FGEP/---/2026",
-    "historial": [
-      { "fecha": "2026-02-28", "estatus": "desaparecido", "nota": "Ficha activa en micrositio FGE Puebla." }
-    ]
-  },
-  {
-    "id": "CASO_0014",
-    "nombre": "Mario Angel Merino Carvantes",
-    "edad": null,
-    "sexo": "Masculino",
-    "estatus": "desaparecido",
-    "fechaDesaparicion": "2026-02-25",
-    "ultimaActualizacion": "2026-02-25",
-    "descripcion": "Reportado como desaparecido el 25 de febrero 2026. Ficha activa en micrositio oficial de la FGE Puebla.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.0470,
-    "lon": -98.2090,
-    "contacto": "222-226-2626",
-    "foto": "https://fiscalia.puebla.gob.mx/Desaparecidos/Home/ObtenerImagenRostro/36415634-fa3b-4b13-6376-08de85536874",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "ficha_busqueda",
-    "noReporte": "FGEP/---/2026",
-    "historial": [
-      { "fecha": "2026-02-25", "estatus": "desaparecido", "nota": "Ficha activa en micrositio FGE Puebla." }
-    ]
-  },
-  {
-    "id": "CASO_0015",
-    "nombre": "David Alfredo Aquino Garcia",
-    "edad": null,
-    "sexo": "Masculino",
-    "estatus": "desaparecido",
-    "fechaDesaparicion": "2026-03-23",
-    "ultimaActualizacion": "2026-03-23",
-    "descripcion": "Reportado como desaparecido el 23 de marzo 2026. Ficha activa en micrositio oficial de la FGE Puebla.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.0490,
-    "lon": -98.1810,
-    "contacto": "222-226-2626",
-    "foto": "https://fiscalia.puebla.gob.mx/Desaparecidos/Home/ObtenerImagenRostro/ec460834-c723-4a82-320c-08de8ad65a8b",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "ficha_busqueda",
-    "noReporte": "FGEP/---/2026",
-    "historial": [
-      { "fecha": "2026-03-23", "estatus": "desaparecido", "nota": "Ficha activa en micrositio FGE Puebla." }
-    ]
-  },
-  {
-    "id": "CASO_0016",
-    "nombre": "Marco Antonio Díaz García",
-    "edad": null,
-    "sexo": "Masculino",
-    "estatus": "desaparecido",
-    "fechaDesaparicion": "2026-03-24",
-    "ultimaActualizacion": "2026-03-24",
-    "descripcion": "Caso más reciente publicado en micrositio oficial de la Fiscalía General del Estado de Puebla al 24 de marzo 2026.",
-    "ubicacion": "Puebla, Puebla",
-    "lat": 19.0443,
-    "lon": -98.1960,
-    "contacto": "222-226-2626",
-    "foto": "https://fiscalia.puebla.gob.mx/Desaparecidos/Home/ObtenerImagenRostro/ac6ad846-8023-40e4-2186-08de8b5bf91d",
-    "url": "https://fiscalia.puebla.gob.mx/Desaparecidos",
-    "fuente": "Fiscalía General del Estado de Puebla",
-    "fuenteTipo": "ficha_busqueda",
-    "noReporte": "FGEP/---/2026",
-    "historial": [
-      { "fecha": "2026-03-24", "estatus": "desaparecido", "nota": "Ficha más reciente publicada en micrositio FGE Puebla." }
-    ]
-  },
-
 {
-"id": "CASO_0001",
+"id": "CASO_0017",
 "nombre": "Argelia Vargas",
 "edad": 30,
 "sexo": "Femenino",
@@ -370,6 +15,7 @@
 "url": "https://www.proceso.com.mx",
 "fuente": "Medios de comunicación",
 "fuenteTipo": "noticia",
+"noReporte": "",
 "historial":[
 {
 "fecha":"2026-03-19",
@@ -378,9 +24,8 @@
 }
 ]
 },
-
 {
-"id": "CASO_0002",
+"id": "CASO_0018",
 "nombre": "Johana Ventura Martínez",
 "edad": 20,
 "sexo": "Femenino",
@@ -396,6 +41,7 @@
 "url": "https://www.proceso.com.mx",
 "fuente": "Medios de comunicación",
 "fuenteTipo": "noticia",
+"noReporte": "",
 "historial":[
 {
 "fecha":"2026-03-04",
@@ -404,9 +50,8 @@
 }
 ]
 },
-
 {
-"id": "CASO_0003",
+"id": "CASO_0019",
 "nombre": "Yeraldine Ventura Martínez",
 "edad": 9,
 "sexo": "Femenino",
@@ -422,6 +67,7 @@
 "url": "https://www.proceso.com.mx",
 "fuente": "Medios de comunicación",
 "fuenteTipo": "noticia",
+"noReporte": "",
 "historial":[
 {
 "fecha":"2026-03-04",
@@ -430,9 +76,8 @@
 }
 ]
 },
-
 {
-"id": "CASO_0004",
+"id": "CASO_0020",
 "nombre": "Félix Ventura Martínez",
 "edad": null,
 "sexo": "Masculino",
@@ -448,6 +93,7 @@
 "url": "https://www.proceso.com.mx",
 "fuente": "Medios de comunicación",
 "fuenteTipo": "noticia",
+"noReporte": "",
 "historial":[
 {
 "fecha":"2026-03-04",
@@ -456,13 +102,12 @@
 }
 ]
 },
-
 {
-"id": "CASO_0005",
+"id": "CASO_0021",
 "nombre": "Lluvia Yareni",
 "edad": 8,
 "sexo": "Femenino",
-"estatus": "desaparecido",
+"estatus": "localizado_sin_vida",
 "fechaDesaparicion": "2024-11-01",
 "ultimaActualizacion": "2025-02-17",
 "descripcion": "Niña reportada como desaparecida en Huauchinango; posteriormente fue localizada sin vida.",
@@ -474,12 +119,13 @@
 "url": "https://www.infobae.com",
 "fuente": "Medios de comunicación",
 "fuenteTipo": "noticia",
+"noReporte": "",
 "historial":[
 {
 "fecha":"2024-11-01",
 "estatus":"desaparecido",
 "nota":"Reporte inicial"
-}
+},
 {
 "fecha":"2025-02-17",
 "estatus":"localizado_sin_vida",
@@ -487,13 +133,12 @@
 }
 ]
 },
-
 {
-"id": "CASO_0006",
+"id": "CASO_0022",
 "nombre": "José Martín Jiménez González",
 "edad": 50,
 "sexo": "Masculino",
-"estatus": "desaparecido",
+"estatus": "localizado_sin_vida",
 "fechaDesaparicion": "2018-11-22",
 "ultimaActualizacion": "2025-11-08",
 "descripcion": "Comerciante desaparecido tras viajar a Tepeaca; localizado años después tras búsqueda familiar.",
@@ -505,6 +150,7 @@
 "url": "https://www.pueblaonline.com.mx",
 "fuente": "Medios de comunicación",
 "fuenteTipo": "noticia",
+"noReporte": "",
 "historial":[
 {
 "fecha":"2018-11-22",
@@ -517,160 +163,4 @@
 "nota":"Confirmación por ADN"
 }
 ]
-},
-  
-{
-"id": "CASO_1001",
-"nombre": "Johana Ventura Martínez",
-"edad": 20,
-"sexo": "Femenino",
-"estatus": "localizado_sin_vida",
-"fechaDesaparicion": "2026-03-04",
-"ultimaActualizacion": "2026-03-23",
-"descripcion": "Reportada desaparecida tras ser privada de la libertad por un grupo armado; posteriormente localizada sin vida junto con familiares.",
-"ubicacion": "Cuyoaco, Puebla",
-"lat": 19.600,
-"lon": -97.590,
-"contacto": "",
-"foto": "",
-"url": "https://www.nmas.com.mx/puebla/localizan-muertas-a-tres-mujeres-madre-y-dos-hijas-en-la-caldera-limites-puebla-tlaxcala-desaparecidas-en-cuyoaco/",
-"fuente": "N+ Noticias",
-"fuenteTipo": "noticia",
-"historial":[
-{
-"fecha":"2026-03-04",
-"estatus":"desaparecido",
-"nota":"Reporte inicial"
-},
-{
-"fecha":"2026-03-23",
-"estatus":"localizado_sin_vida",
-"nota":"Hallazgo en zona limítrofe Puebla–Tlaxcala"
 }
-]
-},
-
-{
-"id": "CASO_1002",
-"nombre": "Yeraldine Ventura Martínez",
-"edad": 9,
-"sexo": "Femenino",
-"estatus": "localizado_sin_vida",
-"fechaDesaparicion": "2026-03-04",
-"ultimaActualizacion": "2026-03-23",
-"descripcion": "Menor reportada desaparecida tras ataque armado; localizada sin vida en zona rural.",
-"ubicacion": "Cuyoaco, Puebla",
-"lat": 19.600,
-"lon": -97.590,
-"contacto": "",
-"foto": "",
-"url": "https://www.nmas.com.mx/puebla/localizan-muertas-a-tres-mujeres-madre-y-dos-hijas-en-la-caldera-limites-puebla-tlaxcala-desaparecidas-en-cuyoaco/",
-"fuente": "N+ Noticias",
-"fuenteTipo": "noticia",
-"historial":[
-{
-"fecha":"2026-03-04",
-"estatus":"desaparecido",
-"nota":"Reporte inicial"
-},
-{
-"fecha":"2026-03-23",
-"estatus":"localizado_sin_vida",
-"nota":"Confirmación por autoridades"
-}
-]
-},
-
-{
-"id": "CASO_1003",
-"nombre": "Lluvia Yareni",
-"edad": 8,
-"sexo": "Femenino",
-"estatus": "localizado_sin_vida",
-"fechaDesaparicion": "2024-11-01",
-"ultimaActualizacion": "2025-02-17",
-"descripcion": "Niña reportada como desaparecida en Huauchinango; localizada posteriormente sin vida.",
-"ubicacion": "Huauchinango, Puebla",
-"lat": 20.177,
-"lon": -98.053,
-"contacto": "",
-"foto": "",
-"url": "https://www.infobae.com",
-"fuente": "Medios de comunicación",
-"fuenteTipo": "noticia",
-"historial":[
-{
-"fecha":"2024-11-01",
-"estatus":"desaparecido",
-"nota":"Reporte inicial"
-},
-{
-"fecha":"2025-02-17",
-"estatus":"localizado_sin_vida",
-"nota":"Hallazgo confirmado por autoridades"
-}
-]
-},
-
-{
-"id": "CASO_1004",
-"nombre": "José Ignacio Rosales Paredes",
-"edad": null,
-"sexo": "Masculino",
-"estatus": "localizado_con_vida",
-"fechaDesaparicion": "2025-12-10",
-"ultimaActualizacion": "2026-01-15",
-"descripcion": "Persona reportada como desaparecida en Puebla y posteriormente localizada con vida.",
-"ubicacion": "Puebla, Puebla",
-"lat": 19.041,
-"lon": -98.206,
-"contacto": "",
-"foto": "",
-"url": "https://fiscalia.puebla.gob.mx/Desaparecidos",
-"fuente": "Fiscalía General del Estado de Puebla",
-"fuenteTipo": "ficha_busqueda",
-"historial":[
-{
-"fecha":"2025-12-10",
-"estatus":"desaparecido",
-"nota":"Reporte inicial"
-},
-{
-"fecha":"2026-01-15",
-"estatus":"localizado_con_vida",
-"nota":"Localización reportada por autoridades"
-}
-]
-},
-
-{
-"id": "CASO_1005",
-"nombre": "Miguel Pérez Eucevió",
-"edad": null,
-"sexo": "Masculino",
-"estatus": "localizado_con_vida",
-"fechaDesaparicion": "2025-11-21",
-"ultimaActualizacion": "2025-12-03",
-"descripcion": "Persona reportada como desaparecida y posteriormente localizada con vida.",
-"ubicacion": "Puebla, Puebla",
-"lat": 19.041,
-"lon": -98.206,
-"contacto": "",
-"foto": "",
-"url": "https://fiscalia.puebla.gob.mx/Desaparecidos",
-"fuente": "Fiscalía General del Estado de Puebla",
-"fuenteTipo": "ficha_busqueda",
-"historial":[
-{
-"fecha":"2025-11-21",
-"estatus":"desaparecido",
-"nota":"Reporte inicial"
-},
-{
-"fecha":"2025-12-03",
-"estatus":"localizado_con_vida",
-"nota":"Localización confirmada"
-}
-]
-}
-]
