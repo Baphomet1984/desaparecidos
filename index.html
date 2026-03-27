@@ -664,6 +664,16 @@ body::before {
   color:rgba(255,34,68,0.35);margin-bottom:0.3rem;
 }
 
+/* ── FUENTE ──────────────────────────────────────────────── */
+.node-source {
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.44rem;letter-spacing:0.1em;
+  padding:0.3rem 1.4rem;
+  border-top:1px solid rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
 /* ── HIDDEN ──────────────────────────────────────────────── */
 .node-card.hidden-card{display:none;}
 
@@ -838,25 +848,40 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
   subdomains:'abcd',maxZoom:19
 }).addTo(map);
 
-// Color map por status
+// Color map por status — soporta tanto "sin-vida" (JSON nuevo) como "encontrado" (legacy)
 const STATUS_COLOR = {
   desaparecido:'#ff2244',
   alerta:      '#ffb300',
   localizado:  '#00ff88',
+  'sin-vida':  '#8899aa',
   encontrado:  '#8899aa',
 };
 const STATUS_LABEL = {
-  desaparecido:'DESAPARECIDO',
-  alerta:      'ALERTA ÁMBAR',
-  localizado:  'LOCALIZADO',
-  encontrado:  'SIN VIDA',
+  desaparecido:'⚠ DESAPARECIDO',
+  alerta:      '▲ ALERTA ÁMBAR',
+  localizado:  '✓ LOCALIZADO',
+  'sin-vida':  '— SIN VIDA',
+  encontrado:  '— SIN VIDA',
 };
 const STATUS_POPUP_CLASS = {
   desaparecido:'pop-status-red',
   alerta:      'pop-status-amber',
   localizado:  'pop-status-green',
+  'sin-vida':  'pop-status-gray',
   encontrado:  'pop-status-gray',
 };
+// Normaliza estatus del JSON nuevo al key interno
+function normalizeStatus(raw){
+  if(!raw) return 'desaparecido';
+  const map = {
+    desaparecido:'desaparecido',
+    alerta:      'alerta',
+    localizado:  'localizado',
+    'sin-vida':  'sin-vida',
+    encontrado:  'sin-vida',
+  };
+  return map[raw.toLowerCase()] || 'desaparecido';
+}
 
 function makeSignalIcon(status){
   const cls = `marker-${status}`;
@@ -903,13 +928,16 @@ async function cargarRegistros(){
     const countEl   = document.getElementById('nodeCount');
     const sigCount  = document.getElementById('signalCount');
 
-    // Stats
-    const stats={desaparecido:0,alerta:0,localizado:0,encontrado:0};
-    data.forEach(p=>{ if(stats[p.status]!==undefined) stats[p.status]++; });
+    // Stats — soporta "estatus" (JSON nuevo) y "status" (legacy)
+    const stats={desaparecido:0,alerta:0,localizado:0,'sin-vida':0};
+    data.forEach(p=>{
+      const key = normalizeStatus(p.estatus || p.status);
+      if(stats[key]!==undefined) stats[key]++;
+    });
     document.getElementById('statDesaparecido').textContent = stats.desaparecido;
     document.getElementById('statAlerta').textContent       = stats.alerta;
     document.getElementById('statLocalizado').textContent   = stats.localizado;
-    document.getElementById('statEncontrado').textContent   = stats.encontrado;
+    document.getElementById('statEncontrado').textContent   = stats['sin-vida'];
 
     countEl.textContent  = `── ${data.length} REGISTRO${data.length!==1?'S':''} EN SISTEMA`;
     sigCount.textContent = `// ${data.length} SEÑALES`;
@@ -922,7 +950,8 @@ async function cargarRegistros(){
     const markers=[];
 
     data.forEach((p,i)=>{
-      const status = p.status || 'desaparecido';
+      // Acepta 'estatus' (JSON nuevo) o 'status' (legacy)
+      const status = normalizeStatus(p.estatus || p.status);
       const pos = (p.lat && p.lon)
         ? [parseFloat(p.lat),parseFloat(p.lon)]
         : DEFAULT_POS[i % DEFAULT_POS.length];
@@ -937,9 +966,9 @@ async function cargarRegistros(){
         .bindPopup(`
           <span class="pop-name">${p.nombre.toUpperCase()}</span>
           <span class="${popClass}">// ${label}</span><br>
-          <span style="color:rgba(255,255,255,0.35)">CASO_${String(i+1).padStart(4,'0')}</span><br>
+          <span style="color:rgba(255,255,255,0.35)">${p.id || 'CASO_'+String(i+1).padStart(4,'0')}</span><br>
           ${p.fechaDesaparicion ? `<span style="color:rgba(255,255,255,0.4)">FECHA: ${p.fechaDesaparicion}</span><br>` : ''}
-          ${p.ubicacion ? `<span style="color:rgba(0,229,204,0.5)">◉ ${p.ubicacion}</span><br>` : ''}
+          ${(p.ubicacion||p.municipio) ? `<span style="color:rgba(0,229,204,0.5)">◉ ${p.ubicacion||p.municipio}</span><br>` : ''}
           ${p.contacto ? `<br><span style="color:${color}">TEL: ${p.contacto}</span>` : ''}
         `,{maxWidth:230});
       markers.push({marker,pos});
@@ -947,7 +976,9 @@ async function cargarRegistros(){
       // Card
       const card = document.createElement('div');
       card.className = 'node-card';
-      card.dataset.status = status;
+      // CSS usa 'encontrado'; normalizar sin-vida para compatibilidad
+      const cssStatus = status === 'sin-vida' ? 'encontrado' : status;
+      card.dataset.status = cssStatus;
       card.dataset.nombre = p.nombre.toLowerCase();
       card.dataset.desc   = (p.descripcion||'').toLowerCase();
       card.dataset.ubi    = (p.ubicacion||'').toLowerCase();
@@ -965,7 +996,7 @@ async function cargarRegistros(){
             <div class="icon">👤</div>
             <div class="txt">SIN FOTOGRAFÍA</div>
           </div>
-          <div class="case-tag">CASO_${String(i+1).padStart(4,'0')}</div>
+          <div class="case-tag">${p.id || 'CASO_'+String(i+1).padStart(4,'0')}</div>
           <div class="status-badge">${label}</div>
         </div>
         <div class="node-body">
@@ -975,18 +1006,19 @@ async function cargarRegistros(){
             ${p.sexo ? `<span>◈ ${p.sexo}</span>` : ''}
           </div>
           ${p.descripcion ? `<div class="node-desc">${p.descripcion}</div>` : ''}
-          ${p.ubicacion   ? `<div class="node-location">${p.ubicacion}</div>` : ''}
+          ${(p.ubicacion||p.municipio) ? `<div class="node-location">${p.ubicacion||p.municipio}</div>` : ''}
         </div>
         <div class="node-date">
           <span>${p.fechaDesaparicion ? '// FECHA: '+p.fechaDesaparicion : '// FECHA: NO REGISTRADA'}</span>
-          <span style="opacity:0.4">LAT ${pos[0].toFixed(3)}°</span>
+          <span style="opacity:0.4">${p.noReporte ? p.noReporte.split('/').pop() : 'LAT '+pos[0].toFixed(3)+'°'}</span>
         </div>
+        ${p.fuente ? `<div class="node-source">◈ ${p.fuente}</div>` : ''}
         ${p.contacto
           ? `<div class="node-contact"><a href="tel:${p.contacto}">${p.contacto}</a></div>`
           : '<div class="node-contact hidden-contact"></div>'
         }
-        <a class="node-btn" href="${p.url||'#'}" target="${p.url?'_blank':'_self'}">
-          <span>${p.url ? 'Ver expediente completo' : 'Reportar información'}</span>
+        <a class="node-btn" href="${p.url||p.fuente_url||'https://fiscalia.puebla.gob.mx/Desaparecidos'}" target="_blank">
+          <span>${p.url ? 'Ver expediente completo' : 'Ver fichas oficiales'}</span>
         </a>
       `;
 
@@ -1029,14 +1061,20 @@ function initSearch(total){
       ? `// ${total} registros en sistema`
       : `// ${vis} de ${total} registros encontrados`;
   }
-  updateCount(total);
+  updateCount(document.querySelectorAll('.node-card').length);
 
   function applyFilters(){
     const q = input.value.trim().toLowerCase();
     const cards = document.querySelectorAll('.node-card');
     let vis=0;
     cards.forEach(card=>{
-      const statusMatch = activeStatus==='all' || card.dataset.status===activeStatus;
+      // 'sin-vida' y 'encontrado' son el mismo estado
+      const cardStatus = card.dataset.status;
+      const pillStatus = activeStatus;
+      const statusMatch = pillStatus==='all'
+        || cardStatus === pillStatus
+        || (pillStatus==='encontrado' && cardStatus==='encontrado')
+        || (pillStatus==='sin-vida'   && cardStatus==='encontrado');
       const textMatch   = !q ||
         card.dataset.nombre.includes(q) ||
         card.dataset.desc.includes(q)   ||
