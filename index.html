@@ -846,14 +846,19 @@ body::before {
 // ═══════════════════════════════════════════
 //  MAPA LEAFLET
 // ═══════════════════════════════════════════
-const HUB_LAT = 19.0872, HUB_LON = -98.1039;
+const HUB_LAT = 19.0414, HUB_LON = -98.2063; // centro aproximado de Puebla
 
 const map = L.map('map',{
-  center:[HUB_LAT,HUB_LON],zoom:13,
-  zoomControl:false,attributionControl:false,
-  scrollWheelZoom:false,dragging:false,
-  doubleClickZoom:false,touchZoom:false,
-  minZoom:11,maxZoom:14,
+  center:[HUB_LAT,HUB_LON],
+  zoom:8, // zoom más abierto para ver todo Puebla
+  zoomControl:true, // activar botones + -
+  attributionControl:false,
+  scrollWheelZoom:true,
+  dragging:true,
+  doubleClickZoom:true,
+  touchZoom:true,
+  minZoom:7,
+  maxZoom:16,
 });
 
 map.whenReady(()=>{
@@ -982,6 +987,7 @@ async function cargarRegistros(){
     }
 
     const markers=[];
+    const bounds=[];
 
     data.forEach((p,i)=>{
       // Acepta 'estatus' (JSON nuevo) o 'status' (legacy)
@@ -1006,7 +1012,7 @@ async function cargarRegistros(){
           ${p.contacto ? `<br><span style="color:${color}">TEL: ${p.contacto}</span>` : ''}
         `,{maxWidth:230});
       markers.push({marker,pos});
-
+      bounds.push(pos);
       // Card
       const card = document.createElement('div');
       card.className = 'node-card';
@@ -1066,7 +1072,15 @@ async function cargarRegistros(){
 
       container.appendChild(card);
     });
-
+  
+    // Ajustar mapa automáticamente a todos los puntos
+  if(bounds.length > 0){
+  map.fitBounds(bounds,{
+    padding:[40,40],
+    maxZoom:12
+  });
+    }
+    
     initSearch(data.length);
 
   }catch(err){
