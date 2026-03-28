@@ -280,6 +280,27 @@ body::before {
 .stat-cell.s-green .stat-label{color:var(--green);}
 .stat-cell.s-gray  .stat-label{color:var(--gray);}
 
+/* ── clave D/A/1/0 en cada celda de stats ── */
+.stat-key {
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.55rem;letter-spacing:0.25em;
+  opacity:0.4;margin-bottom:0.1rem;
+}
+.stat-cell.s-red   .stat-key{color:var(--red);}
+.stat-cell.s-amber .stat-key{color:var(--amber);}
+.stat-cell.s-green .stat-key{color:var(--green);}
+.stat-cell.s-gray  .stat-key{color:var(--gray);}
+
+/* clave en leyenda */
+.leyenda-key {
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.62rem;font-weight:700;
+  padding:0 4px;
+  border:1px solid currentColor;
+  opacity:0.75;
+  border-radius:1px;
+}
+
 /* ── NETWORK META ────────────────────────────────────────── */
 .network-meta {
   font-family:'Share Tech Mono',monospace;
@@ -741,18 +762,22 @@ body::before {
   <!-- STATS -->
   <div class="stats-ribbon" id="statsRibbon">
     <div class="stat-cell s-red">
+      <div class="stat-key">D</div>
       <div class="stat-num" id="statDesaparecido">–</div>
       <div class="stat-label">Desaparecidos</div>
     </div>
     <div class="stat-cell s-amber">
+      <div class="stat-key">A</div>
       <div class="stat-num" id="statAlerta">–</div>
       <div class="stat-label">Alerta Ámbar</div>
     </div>
     <div class="stat-cell s-green">
+      <div class="stat-key">1</div>
       <div class="stat-num" id="statLocalizado">–</div>
       <div class="stat-label">Localizados</div>
     </div>
     <div class="stat-cell s-gray">
+      <div class="stat-key">0</div>
       <div class="stat-num" id="statEncontrado">–</div>
       <div class="stat-label">Sin Vida</div>
     </div>
@@ -760,10 +785,10 @@ body::before {
 
   <!-- LEGEND -->
   <div class="legend">
-    <div class="legend-item ld-red"><div class="legend-dot"></div>Desaparecido</div>
-    <div class="legend-item ld-amber"><div class="legend-dot" style="background:var(--amber);box-shadow:0 0 6px var(--amber-glow)"></div>Alerta Ámbar</div>
-    <div class="legend-item ld-green"><div class="legend-dot" style="background:var(--green);box-shadow:0 0 6px var(--green-glow)"></div>Localizado con vida</div>
-    <div class="legend-item ld-gray"><div class="legend-dot" style="background:var(--gray)"></div>Encontrado sin vida</div>
+    <div class="legend-item ld-red"><div class="legend-dot"></div><span class="leyenda-key">D</span> Desaparecido / Extraviado</div>
+    <div class="legend-item ld-amber"><div class="legend-dot" style="background:var(--amber);box-shadow:0 0 6px var(--amber-glow)"></div><span class="leyenda-key">A</span> Alerta Ámbar</div>
+    <div class="legend-item ld-green"><div class="legend-dot" style="background:var(--green);box-shadow:0 0 6px var(--green-glow)"></div><span class="leyenda-key">1</span> Localizado con vida</div>
+    <div class="legend-item ld-gray"><div class="legend-dot" style="background:var(--gray)"></div><span class="leyenda-key">0</span> Localizado sin vida / Fallecido</div>
   </div>
 
   <!-- NETWORK META -->
@@ -870,17 +895,38 @@ const STATUS_POPUP_CLASS = {
   'sin-vida':  'pop-status-gray',
   encontrado:  'pop-status-gray',
 };
-// Normaliza estatus del JSON nuevo al key interno
+// Normaliza estatus del JSON al key interno
+// Claves oficiales:
+//   D  → desaparecido / extraviado
+//   A  → alerta ámbar
+//   1  → localizado con vida
+//   0  → localizado sin vida / fallecido
+// También acepta las formas textuales legacy
 function normalizeStatus(raw){
-  if(!raw) return 'desaparecido';
-  const map = {
-    desaparecido:'desaparecido',
-    alerta:      'alerta',
-    localizado:  'localizado',
-    'sin-vida':  'sin-vida',
-    encontrado:  'sin-vida',
+  if(raw === null || raw === undefined) return 'desaparecido';
+  const s = String(raw).trim();
+  const MAP = {
+    // ── claves cortas oficiales ──
+    'D': 'desaparecido',
+    'd': 'desaparecido',
+    'A': 'alerta',
+    'a': 'alerta',
+    '1': 'localizado',
+    '0': 'sin-vida',
+    // ── valores textuales legacy ──
+    'desaparecido':  'desaparecido',
+    'extraviado':    'desaparecido',
+    'alerta':        'alerta',
+    'alerta-amber':  'alerta',
+    'localizado':    'localizado',
+    'localizado con vida': 'localizado',
+    'sin-vida':      'sin-vida',
+    'encontrado':    'sin-vida',
+    'fallecido':     'sin-vida',
+    'muerto':        'sin-vida',
+    'localizado sin vida': 'sin-vida',
   };
-  return map[raw.toLowerCase()] || 'desaparecido';
+  return MAP[s] ?? MAP[s.toLowerCase()] ?? 'desaparecido';
 }
 
 function makeSignalIcon(status){
@@ -1086,7 +1132,43 @@ function initSearch(total){
     updateCount(vis);
   }
 
-  input.addEventListener('input',applyFilters);
+  input.addEventListener('input',applyFilters);<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIGNAL.LOST // RED_BÚSQUEDA · PERSONAS DESAPARECIDAS</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
+
+:root {
+  --bg:        #03080d;
+  --panel:     rgba(3,8,13,0.88);
+  --white:     #e8f4f0;
+  --dim:       rgba(232,244,240,0.45);
+
+  /* Status colors */
+  --red:       #ff2244;
+  --red-glow:  rgba(255,34,68,0.35);
+  --amber:     #ffb300;
+  --amber-glow:rgba(255,179,0,0.35);
+  --green:     #00ff88;
+  --green-glow:rgba(0,255,136,0.35);
+  --gray:      #8899aa;
+  --gray-glow: rgba(136,153,170,0.3);
+
+  /* UI accent */
+  --teal:      #00e5cc;
+  --teal-dim:  rgba(0,229,204,0.15);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+
 
   pills.forEach(pill=>{
     pill.addEventListener('click',()=>{
