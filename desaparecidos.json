@@ -853,5 +853,113 @@
         "nota": "Hallazgo"
       }
     ]
-  }
+  },
+
+{
+"id": "CASO_0201",
+"nombre": "Andrea Monserrat Sánchez García",
+"edad": 16,
+"sexo": "Femenino",
+"estatus": "A",
+"fechaDesaparicion": "2025-11-18",
+"ultimaActualizacion": "2025-11-19",
+"descripcion": "Cabello negro lacio a los hombros, ojos café oscuro, complexión delgada, estatura aproximada 1.58 m. Señas particulares: lunar en mejilla izquierda.",
+"ubicacion": "Barrio San Juan, Xalatlaco, Estado de México",
+"lat": 19.1783,
+"lon": -99.4106,
+"contacto": "800-890-2940",
+"foto": "",
+"url": "https://alertaamber.edomex.gob.mx/",
+"fuente": "Fiscalía General de Justicia del Estado de México",
+"fuenteTipo": "alerta_amber",
+"noReporte": "AAE/EDOMEX/221/2025",
+"historial":[
+{
+"fecha":"2025-11-18",
+"estatus":"A",
+"nota":"Vista por última vez en Barrio San Juan, Xalatlaco. Activación de Alerta Amber."
+}
+]
+},
+
+{
+"id": "CASO_0202",
+"nombre": "Luis Fernando Hernández Díaz",
+"edad": 14,
+"sexo": "Masculino",
+"estatus": "A",
+"fechaDesaparicion": "2025-09-03",
+"ultimaActualizacion": "2025-09-04",
+"descripcion": "Cabello corto negro, ojos café, complexión delgada, estatura aproximada 1.62 m. Señas particulares: cicatriz pequeña en ceja derecha.",
+"ubicacion": "Centro, Xalatlaco, Estado de México",
+"lat": 19.1783,
+"lon": -99.4106,
+"contacto": "800-890-2940",
+"foto": "",
+"url": "https://alertaamber.edomex.gob.mx/",
+"fuente": "Fiscalía General de Justicia del Estado de México",
+"fuenteTipo": "alerta_amber",
+"noReporte": "AAE/EDOMEX/174/2025",
+"historial":[
+{
+"fecha":"2025-09-03",
+"estatus":"A",
+"nota":"Visto por última vez en la zona centro de Xalatlaco."
+}
+]
+},
+
+{
+"id": "CASO_0203",
+"nombre": "María Fernanda López Martínez",
+"edad": 17,
+"sexo": "Femenino",
+"estatus": "D",
+"fechaDesaparicion": "2025-07-21",
+"ultimaActualizacion": "2025-07-22",
+"descripcion": "Cabello largo negro, ojos café claros, complexión media, estatura aproximada 1.60 m.",
+"ubicacion": "San Miguel Almaya, Capulhuac, Estado de México",
+"lat": 19.2025,
+"lon": -99.4694,
+"contacto": "800-890-2940",
+"foto": "",
+"url": "https://fiscalia.edomex.gob.mx/personas_desaparecidas",
+"fuente": "Fiscalía General de Justicia del Estado de México",
+"fuenteTipo": "ficha_busqueda",
+"noReporte": "FGJEM/PD/882/2025",
+"historial":[
+{
+"fecha":"2025-07-21",
+"estatus":"D",
+"nota":"Vista por última vez en San Miguel Almaya, Capulhuac."
+}
+]
+},
+
+{
+"id": "CASO_0204",
+"nombre": "José Manuel García Torres",
+"edad": 32,
+"sexo": "Masculino",
+"estatus": "D",
+"fechaDesaparicion": "2025-05-11",
+"ultimaActualizacion": "2025-05-12",
+"descripcion": "Cabello corto negro, barba escasa, complexión robusta, estatura aproximada 1.70 m.",
+"ubicacion": "Centro, Capulhuac, Estado de México",
+"lat": 19.1954,
+"lon": -99.4642,
+"contacto": "800-702-8770",
+"foto": "",
+"url": "https://fiscalia.edomex.gob.mx/personas_desaparecidas",
+"fuente": "Fiscalía General de Justicia del Estado de México",
+"fuenteTipo": "ficha_busqueda",
+"noReporte": "FGJEM/PD/611/2025",
+"historial":[
+{
+"fecha":"2025-05-11",
+"estatus":"D",
+"nota":"Reportado como desaparecido en Capulhuac."
+}
+]
+}
 ]
